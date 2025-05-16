@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap');
+    /*–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+/* DARK MODE OVERRIDES (make default—so dark first) */
+    html {
+      /* if you want dark by default, initialize here */
+      --initial-theme: dark;
+    }
+    [data-theme="dark"] {
+      /* background gradient */
+      --bg-gradient: linear-gradient(135deg, #12030A, #512D38);
+
+      /* global text */
+      --text: #E0E0E0;
+      /* secondary text (placeholders, less-important copy) */
+      --text-secondary: #BBBBBB;
+      /* links, buttons, highlights */
+      --link-color: #DFA8C5;
+
+      /* card & section backgrounds */
+      --card-bg: rgba( 30, 15, 25, 0.7 );
+      /* form field backgrounds */
+      --input-bg: rgba( 30, 15, 25, 0.5 );
+    }
+    /*–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    /* DARK‐MODE BUTTONS, FOOTER, ICONS & CURSOR OVERRIDES */
+    [data-theme="dark"] {
+      /* Buttons */
+      --btn-primary-bg:   linear-gradient(45deg, var(--link-color), var(--medium-pink));
+      --btn-primary-text: var(--dark-purple);
+      --btn-secondary-bg: transparent;
+      --btn-secondary-border: var(--link-color);
+      --btn-secondary-text: var(--link-color);
+
+      /* Footer & icons */
+      --footer-bg: rgba(18, 3, 10, 0.85);
+      --footer-logo-color: var(--link-color);
+      --icon-color: var(--link-color);
+
+      /* Typewriter cursor */
+      --cursor-color: var(--link-color);
+    }
+    /*–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    /* Dark-mode button & skill-pill text */
+    [data-theme="dark"] .btn-primary,
+    [data-theme="dark"] .btn-secondary {
+      /* make the text inside your primary/secondary buttons dark */
+      color: var(--dark-purple) !important;
+    }
+
+    [data-theme="dark"] .skill {
+      /* make the text inside the skill pills dark */
+      color: var(--dark-purple) !important;
+    }
+
+
+      /*–––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    /* Dark-mode overrides for button & skill text */
+    [data-theme="dark"] .btn-primary,
+    [data-theme="dark"] .btn-secondary,
+    [data-theme="dark"] .submit-btn {
+      /* use your dark-purple for maximum contrast */
+      color: var(--dark-purple) !important;
+    }
+
+    [data-theme="dark"] .skill {
+      /* skill pills */
+      color: var(--dark-purple) !important;
+    }
+
+    /* keep your typewriter cursor visible too */
+    [data-theme="dark"] #typewriter::after {
+      color: var(--link-color); /* or whatever bright accent you prefer */
+    }
+
+    /* Apply to your components */
+    [data-theme="dark"] .btn-primary {
+      background: var(--btn-primary-bg) !important;
+      color:      var(--btn-primary-text) !important;
+    }
+
+    [data-theme="dark"] .btn-secondary {
+      background: var(--btn-secondary-bg) !important;
+      border-color: var(--btn-secondary-border) !important;
+      color: var(--btn-secondary-text) !important;
+    }
+
+    [data-theme="dark"] .footer {
+      background: var(--footer-bg) !important;
+    }
+
+    [data-theme="dark"] .footer-logo {
+      color: var(--footer-logo-color) !important;
+    }
+
+    [data-theme="dark"] .footer-social .social-link {
+      color: var(--icon-color) !important;
+      /* if the SVG stroke needs recoloring, add: */
+      /* stroke: var(--icon-color) !important; */
+    }
+
+    [data-theme="dark"] #typewriter::after {
+      color: var(--cursor-color);
+    }
+
+    /* apply our new vars */
+    body {
+      background: var(--bg-gradient);
+      color:      var(--text);
+    }
+
+    /* headings & primary copy */
+    .hero-subtitle,
+    .hero-description,
+    .section-title,
+    .project-title,
+    .project-description,
+    .about-content p,
+    .exp-date,
+    .exp-position,
+    .exp-company,
+    .exp-description,
+    .form-label {
+      color: var(--text);
+    }
+
+    /* links, nav‐links, logos, buttons */
+    a,
+    .logo,
+    .footer-logo,
+    .nav-link,
+    .project-link,
+    .btn-primary,
+    .btn-secondary,
+    .footer-social .social-link {
+      color: var(--link-color);
+    }
+
+    /* cards & panels */
+    .project-card,
+    .contact-form,
+    .exp-item {
+      background: var(--card-bg) !important;
+    }
+
+    /* form fields */
+    .form-input,
+    .form-textarea {
+      background: var(--input-bg) !important;
+      color:      var(--text)     !important;
+    }
+
+    /* placeholders */
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color:    var(--text-secondary);
+      opacity: 1;
+    }
+
+    :root {
+      --rich-purple: #512D38;
+      --medium-pink: #B27092;
+      --light-pink: #F4BFDB;
+      --dark-purple: #12030A;
+      --light-blue: #ADD1E8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter Tight', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-blue) 100%);
+      color: var(--rich-purple);
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(81, 45, 56, 0.55);
+      backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 2px 16px 0 rgba(81, 45, 56, 0.08);
+      border-bottom: 1px solid rgba(244, 191, 219, 0.18);
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--light-pink);
+      text-decoration: none;
+      text-shadow: 0 2px 4px rgba(18, 3, 10, 0.12);
+      transition: all 0.3s ease;
+      margin-left: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+      color: var(--light-blue);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      margin-right: 1.5rem;
+    }
+    
+    .nav-link {
+      color: #f4bfdbe0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+      letter-spacing: 0.2px;
+    }
+    
+    .nav-link:hover {
+      color: var(--light-blue);
+      transform: translateY(-2px);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--light-pink), var(--light-blue));
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .hero {
+      margin-top: 80px; /* Add margin to account for fixed navbar */
+      height: calc(90vh - 80px); /* Adjust height to account for navbar */
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: visible;
+      background: transparent;
+    }
+    
+    .hero-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+      z-index: 0;
+    }
+    
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    .shape-1 {
+      top: 20%;
+      left: 10%;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+      animation-delay: 0s;
+    }
+    
+    .shape-2 {
+      bottom: 10%;
+      right: 5%;
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(45deg, var(--medium-pink), var(--light-blue));
+      animation-delay: -5s;
+    }
+    
+    .shape-3 {
+      top: 60%;
+      left: 40%;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(45deg, var(--rich-purple), var(--light-blue));
+      animation-delay: -10s;
+    }
+    
+    .hero-subtitle {
+      color: var(--rich-purple);
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.2s;
+    }
+    
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.4s;
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 3px 5px rgba(18, 3, 10, 0.1);
+    }
+    
+    .hero-title span {
+      color: var(--light-blue);
+    }
+    
+    .hero-description {
+      font-size: 1.25rem;
+      color: var(--dark-purple);
+      font-weight: 500;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.6s;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.8s;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+      color: var(--light-pink);
+      border: none;
+      box-shadow: 0 4px 10px rgba(81, 45, 56, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(45deg, var(--medium-pink), var(--rich-purple));
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(81, 45, 56, 0.4);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--rich-purple);
+      border: 1px solid var(--medium-pink);
+      box-shadow: 0 4px 10px rgba(81, 45, 56, 0.1);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(178, 112, 146, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(81, 45, 56, 0.2);
+      border-color: var(--light-blue);
+    }
+    
+    .section {
+      padding: 6rem 0;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--rich-purple), var(--medium-pink));
+      animation: pulse 2s infinite;
+    }
+    
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .project-card {
+      background: linear-gradient(135deg, rgba(244, 191, 219, 0.9) 0%, rgba(173, 209, 232, 0.9) 100%);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      position: relative;
+      border: 1px solid rgba(81, 45, 56, 0.1);
+      box-shadow: 0 5px 15px rgba(18, 3, 10, 0.1);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(18, 3, 10, 0.2);
+      border-color: var(--medium-pink);
+    }
+    
+    .project-image {
+      height: 200px;
+      width: 100%;
+      background-color: var(--dark-purple);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .project-image:hover img {
+      transform: scale(1.08);
+    }
+    
+    .project-content {
+      padding: 1.5rem;
+    }
+    
+    .project-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .project-tag {
+      background: linear-gradient(45deg, rgba(81, 45, 56, 0.1), rgba(173, 209, 232, 0.2));
+      color: var(--rich-purple);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(81, 45, 56, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .project-tag:hover {
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+      color: var(--light-pink);
+      transform: translateY(-2px);
+    }
+    
+    .project-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--rich-purple);
+    }
+    
+    .project-description {
+      color: var(--dark-purple);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .project-link {
+      color: var(--rich-purple);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .project-link:hover {
+      color: var(--medium-pink);
+      transform: translateX(3px);
+    }
+    
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .about-image {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 400px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: calc(100% + 40px);
+      height: calc(100% + 40px);
+      border: 2px solid var(--medium-pink);
+      z-index: -1;
+      animation: borderPulse 4s infinite ease-in-out;
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      max-width: 350px;
+      max-height: 350px;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: drop-shadow(0 5px 15px rgba(81, 45, 56, 0.2));
+      transition: all 0.5s ease;
+      display: block;
+    }
+    
+    .image-credit {
+      display: block;
+      margin-top: 2rem;
+      color: var(--rich-purple);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    .image-credit a {
+      color: var(--medium-pink);
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .image-credit a:hover {
+      color: var(--rich-purple);
+    }
+    
+    .about-image:hover img {
+      transform: scale(1.03);
+      filter: drop-shadow(0 8px 20px rgba(81, 45, 56, 0.3));
+    }
+    
+    .about-content p {
+      color: var(--dark-purple);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+    
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .skill {
+      background: linear-gradient(45deg, rgba(244, 191, 219, 0.8), rgba(173, 209, 232, 0.8));
+      color: var(--rich-purple);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(81, 45, 56, 0.1);
+      font-weight: 500;
+    }
+    
+    .skill:hover {
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+      color: var(--light-pink);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(81, 45, 56, 0.3);
+    }
+    
+    .experience {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .exp-item {
+      background: linear-gradient(135deg, rgba(244, 191, 219, 0.9) 0%, rgba(173, 209, 232, 0.9) 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(81, 45, 56, 0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(18, 3, 10, 0.1);
+    }
+    
+    .exp-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(18, 3, 10, 0.15);
+      border-color: var(--medium-pink);
+    }
+    
+    .exp-date {
+      color: #512D38;
+      font-weight: 600;
+    }
+    
+    .exp-position {
+      color: var(--rich-purple);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .exp-company {
+      color: #7a3c5a;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    
+    .exp-description {
+      color: var(--dark-purple);
+      line-height: 1.7;
+    }
+    
+    .contact-form {
+      background: linear-gradient(135deg, rgba(244, 191, 219, 0.9) 0%, rgba(173, 209, 232, 0.9) 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(81, 45, 56, 0.1);
+      box-shadow: 0 5px 15px rgba(18, 3, 10, 0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--rich-purple);
+      font-weight: 500;
+    }
+    
+    .form-input,
+    .form-textarea {
+      background: rgba(244, 191, 219, 0.3);
+      border: 1px solid rgba(81, 45, 56, 0.2);
+      color: var(--dark-purple);
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--medium-pink);
+      box-shadow: 0 0 0 3px rgba(178, 112, 146, 0.2);
+      outline: none;
+    }
+    
+    .form-textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+      color: var(--light-pink);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(81, 45, 56, 0.3);
+    }
+    
+    .submit-btn:hover {
+      background: linear-gradient(45deg, var(--medium-pink), var(--rich-purple));
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(81, 45, 56, 0.4);
+    }
+    
+    .footer {
+      background: linear-gradient(135deg, var(--rich-purple) 0%, var(--medium-pink) 100%);
+      border-top: 1px solid rgba(244, 191, 219, 0.2);
+      padding: 3rem 0;
+      margin-top: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .footer::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 100px;
+      background: var(--light-pink);
+      bottom: -70px;
+      left: -50%;
+      border-radius: 50%;
+      opacity: 0.1;
+    }
+    #typewriter::after {
+      content: "|";
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%,100% { opacity: 0; }
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--light-pink);
+      text-decoration: none;
+      text-shadow: 0 2px 4px rgba(18, 3, 10, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .footer-logo:hover {
+      transform: scale(1.05);
+      color: var(--light-blue);
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-link {
+      background: linear-gradient(45deg, rgba(244, 191, 219, 0.2), rgba(173, 209, 232, 0.2));
+      color: var(--light-pink);
+      border: 1px solid rgba(244, 191, 219, 0.3);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: linear-gradient(45deg, var(--light-pink), var(--light-blue));
+      color: var(--rich-purple);
+      transform: translateY(-5px) rotate(8deg);
+      box-shadow: 0 5px 15px rgba(244, 191, 219, 0.3);
+    }
+    
+    .footer-copyright {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--light-pink);
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-20px) scale(1.05);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+    
+    @keyframes borderPulse {
+      0%, 100% {
+        border-color: var(--medium-pink);
+      }
+      50% {
+        border-color: var(--light-blue);
+      }
+    }
+    
+    /* Hide custom cursor by default, only show on desktop and when moving */
+    .custom-cursor, .cursor-dot {
+      display: none !important;
+    }
+    @media (min-width: 1025px) {
+      .custom-cursor, .cursor-dot {
+        display: block !important;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .about-image {
+        max-width: 300px;
+      }
+      .about-image img {
+        max-width: 250px;
+        max-height: 250px;
+      }
+      .image-credit {
+        margin-top: 1.2rem;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .mobile-nav-close {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .hero {
+        height: auto;
+        padding: 6rem 0;
+      }
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+      .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .about-image {
+        max-width: 100%;
+      }
+      .about-image img {
+        max-width: 100%;
+        max-height: 180px;
+      }
+      .image-credit {
+        margin-top: 0.8rem;
+      }
+    }
+    
+    .mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light-pink);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    
+    @media (max-width: 768px) {
+      .mobile-nav-toggle {
+        display: block;
+      }
+    
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: linear-gradient(135deg, var(--rich-purple) 0%, var(--medium-pink) 100%);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.3s ease;
+        z-index: 99;
+      }
+    
+      .nav-links.active {
+        right: 0;
+        box-shadow: -5px 0 20px rgba(18, 3, 10, 0.3);
+      }
+    
+      .mobile-nav-close {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        color: var(--light-pink);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+    
+    /* Sidebar Styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 270px;
+      background: rgba(81, 45, 56, 0.85);
+      backdrop-filter: blur(18px) saturate(180%);
+      box-shadow: 2px 0 24px 0 rgba(81, 45, 56, 0.12);
+      border-right: 1px solid rgba(244, 191, 219, 0.18);
+      z-index: 200;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.77,0.2,0.05,1.0);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+    }
+    .sidebar.open {
+      transform: translateX(0);
+    }
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+    .sidebar-close {
+      background: none;
+      border: none;
+      color: var(--light-pink);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .sidebar-close:hover {
+      color: var(--light-blue);
+    }
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .sidebar .nav-link {
+      display: block;
+      width: max-content;
+      margin-left: 0;
+      margin-right: 0;
+      color: #f4bfdbe0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: color 0.2s, transform 0.2s;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      color: var(--light-blue);
+      transform: translateX(8px);
+    }
+    .sidebar .nav-link::after {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--light-pink), var(--light-blue));
+      transition: width 0.3s;
+    }
+    .sidebar .nav-link:hover::after,
+    .sidebar .nav-link.active::after {
+      width: 100%;
+    }
+    .sidebar-toggle {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 300;
+      background: rgba(81, 45, 56, 0.7);
+      color: var(--light-pink);
+      border: none;
+      font-size: 2.2rem;
+      border-radius: 8px;
+      padding: 0.3rem 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(81, 45, 56, 0.08);
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar-toggle:hover {
+      background: var(--medium-pink);
+      color: var(--light-blue);
+    }
+    @media (max-width: 600px) {
+      .sidebar {
+        width: 80vw;
+        padding: 2rem 1rem;
+      }
+      .sidebar-toggle {
+        top: 1rem;
+        left: 1rem;
+        font-size: 2rem;
+        padding: 0.2rem 0.7rem;
+      }
+    }
+    /* Hide old horizontal nav */
+    .nav, .mobile-nav-toggle, .nav-links, .mobile-nav-close {
+      display: none !important;
+    }
+    :root {
+      /* light theme colors */
+      --bg-gradient: linear-gradient(135deg, var(--light-pink), var(--light-blue));
+      --text: var(--rich-purple);
+      /* …and any other “light” variables */
+    }
+
+    /* Dark mode overrides */
+  [data-theme="dark"] {
+    /* background gradient */
+    --bg-gradient: linear-gradient(135deg, #12030A, #512D38);
+
+    /* headings and primary text (used by body, .hero-subtitle, .section-title, etc.) */
+    --rich-purple:  #F4BFDB;
+
+    /* paragraph/body copy, descriptions, etc. */
+    --dark-purple:  #E0E0E0;
+
+    --purple: #512D38;
+
+    /* accent color (buttons, underlines, tags) */
+    --medium-pink:  #DFA8C5;
+
+    /* you can leave --light-pink and --light-blue as-is,
+      or tweak them if you want slightly different highlights */
+  }
+
+
+    /* then use your variables everywhere: */
+    body {
+      background: var(--bg-gradient);
+      color: var(--text);
+    }
+    #theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: color 0.3s;
+      margin-left: auto; /* push it to the right if you like */
+    }
+    /* make all buttons use dark-purple text in dark mode */
+    html[data-theme="dark"] .btn-primary,
+    html[data-theme="dark"] .submit-btn {
+      /* this is your #12030A dark-purple color */
+      color: var(--purple) !important;
+    }
+    html[data-theme="dark"] .exp-date,
+    html[data-theme="dark"] .exp-company {
+      color: var(--text) !important;
+    }
+
+    html[data-theme="dark"] .skill {
+      color: var(--purple) !important;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="custom-cursor"></div>
+  <div class="cursor-dot"></div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebarNav">
+    <div class="sidebar-header">
+      <a href="#" class="logo">portfolio.</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode">🌓</button>
+      <button class="sidebar-close" id="sidebarClose">✕</button>
+    </div>
+    <div class="sidebar-links">
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hamburger Button -->
+  <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+
+  <main>
+    <section class="hero">
+      <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-subtitle">Hello, I'm</p>
+          <h1 class="hero-title">
+            <span id="typewriter"></span><span class="dot">.</span>
+          </h1>
+          <p class="hero-description">
+            Turning ideas into reality, one algorithm at a time! I'm a full-stack developer and generative AI enthusiast with hands-on experience building scalable tools, fine-tuning models, and optimizing systems for real-world impact. I believe tech should be accessible to everyone, and I'm passionate about making it work for everyone. Let's build something amazing together!
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        
+        <div class="projects">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="images/streamly.png" alt="Streamly - Decentralized Social Platform">
+            </div>
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">Django</span>
+                <span class="project-tag">Docker</span>
+                <span class="project-tag">PostgreSQL</span>
+                <span class="project-tag">SQLite</span>
+                <span class="project-tag">HTML</span>
+                <span class="project-tag">CSS</span>
+                <span class="project-tag">JavaScript</span>
+                <span class="project-tag">Heroku</span>
+              </div>
+              <h3 class="project-title">Streamly</h3>
+              <p class="project-description">A decentralized social platform with Docker-based deployment and RESTful APIs. Features include GitHub activity feed integration, user relationship graphs for post visibility control, and comprehensive REST APIs for identity and friend management.</p>
+              <div class="project-links">
+                <a href="#" class="project-link">View Live →</a>
+                <a href="#" class="project-link">View Code →</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-image">
+              <img src="images/eventease.png" alt="EventEase - QR-based Event Check-in App">
+            </div>
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="project-tag">Java</span>
+                <span class="project-tag">Firebase</span>
+                <span class="project-tag">Android Studio</span>
+                <span class="project-tag">JUnit</span>
+                <span class="project-tag">Agile</span>
+                <span class="project-tag">Git</span>
+                <span class="project-tag">GitHub</span>
+                <span class="project-tag">CI/CD</span>
+                <span class="project-tag">UML</span>
+                <span class="project-tag">XML</span>
+              </div>
+              <h3 class="project-title">EventEase</h3>
+              <p class="project-description">An Android application for QR-based event check-in with real-time tracking and automated notifications. Achieved 97% test coverage and implemented CI/CD pipelines for streamlined deployment.</p>
+              <div class="project-links">
+                <a href="#" class="project-link">View Live →</a>
+                <a href="#" class="project-link">View Code →</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-card">
+            <div class="project-image">
+              <img src="images/tweethub.png" alt="TweetHub - Tweet Management Tool">
+            </div>
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="project-tag">MongoDB</span>
+                <span class="project-tag">JSON</span>
+                <span class="project-tag">Python</span>
+                <span class="project-tag">PyMongo</span>
+                <span class="project-tag">Agile</span>
+                <span class="project-tag">Git</span>
+                <span class="project-tag">GitHub</span>
+                <span class="project-tag">CI/CD</span>
+                <span class="project-tag">REST API</span>
+              </div>
+              <h3 class="project-title">TweetHub</h3>
+              <p class="project-description">A tweet management tool with batch processing capabilities and optimized query performance. Features include a sophisticated ranking system for tweets and users, reducing search time by 30%.</p>
+              <div class="project-links">
+                <a href="#" class="project-link">View Live →</a>
+                <a href="#" class="project-link">View Code →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        
+        <div class="about">
+          <div class="about-image">
+            <img src="images/undraw_creative-flow_t3kz.svg" alt="Creative Flow illustration by unDraw">
+            <small class="image-credit">
+              A cute illustration by <a href="https://undraw.co/" target="_blank" rel="noopener">unDraw</a>
+            </small>
+          </div>
+          
+          <div class="about-content">
+            <p>Hi! I'm Ashlyn Benoy, a developer who loves turning complex problems into simple, elegant solutions. My journey has taken me from building interactive learning apps in Dubai to fine-tuning AI models and optimizing data pipelines at Cognizant and the University of Alberta. I thrive on making technology accessible, whether I'm boosting ML performance, automating workflows, or collaborating in fast-paced Agile teams.</p>
+            
+            <p>I'm passionate about generative AI, full-stack development, and using code to make a real-world impact. When I'm not coding, you'll find me exploring new tech, reading sci-fi, or hiking a new trail. Let's connect and create something amazing!</p>
+            
+            <div class="skills">
+              <span class="skill">Python</span>
+              <span class="skill">JavaScript</span>
+              <span class="skill">Java</span>
+              <span class="skill">C/C++</span>
+              <span class="skill">SQL</span>
+              <span class="skill">MATLAB</span>
+              <span class="skill">TypeScript</span>
+              <span class="skill">React</span>
+              <span class="skill">Django</span>
+              <span class="skill">PyTorch</span>
+              <span class="skill">TensorFlow</span>
+              <span class="skill">PySpark</span>
+              <span class="skill">Firebase</span>
+              <span class="skill">Docker</span>
+              <span class="skill">Git</span>
+              <span class="skill">Linux/Unix</span>
+              <span class="skill">Machine Learning</span>
+              <span class="skill">REST APIs</span>
+              <span class="skill">CI/CD</span>
+              <span class="skill">Agile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        
+        <div class="experience">
+          <div class="exp-item">
+            <div class="exp-date">2022 - 2026</div>
+            <div>
+              <h3 class="exp-position">Bachelor of Science in Computing Science</h3>
+              <p class="exp-company">University of Alberta</p>
+              <p class="exp-description">Relevant coursework: Data Structures & Algorithms, Database Management, Machine Learning, Artificial Intelligence, Object-Oriented Programming, Unified Modeling Language, Software Development Life Cycle, Web Development, Software Engineering, Reinforcement Learning.</p>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        
+        <div class="experience">
+          <div class="exp-item">
+            <div class="exp-date">May 2025 - Present</div>
+            <div>
+              <h3 class="exp-position">Generative AI Extern</h3>
+              <p class="exp-company">Cognizant (Remote, Canada)</p>
+              <p class="exp-description">
+                • Built full-stack AI tools including a Python-based text completion engine, emphasizing data processing and scalable application design.<br>
+                • Fine-tuned BERT and other LLM models to improve classification accuracy by 21% and speed by 18% using optimized data pipelines and inference techniques.<br>
+                • Engineered production-like pipelines using PySpark and optimized data flows for large-scale ML experiments.<br>
+                • Built CI/CD pipelines with GitHub Actions to support continuous integration and automated testing.<br>
+                • Gained hands-on experience with generative AI model iteration and validation.
+              </p>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-date">January 2025 - April 2025</div>
+            <div>
+              <h3 class="exp-position">Teaching Assistant</h3>
+              <p class="exp-company">University of Alberta (Edmonton, AB)</p>
+              <p class="exp-description">
+                • Furthered students' understanding of set theory, logic, and induction, and their use in the practice of reasoning about algorithms and programs (CMPUT 272 – Formal Systems and Logic in Computing Science).<br>
+                • Designed and delivered seminars focused on key aspects of course content from CMPUT 272 - Formal Systems and Logic in Computing Science, tailoring sessions to address specific topics and challenges.<br>
+                • Assisted in administering and proctoring exams, maintaining academic integrity standards, while also conducting regular office hours to offer individualized assistance and mentorship.
+              </p>
+            </div>
+          </div>
+          
+          <div class="exp-item">
+            <div class="exp-date">July 2024 - February 2025</div>
+            <div>
+              <h3 class="exp-position">Research Assistant</h3>
+              <p class="exp-company">University of Alberta (Edmonton, AB)</p>
+              <p class="exp-description">
+                • Developed and evaluated optimization algorithms (Genetic Algorithms, Simulated Annealing, MAP-Elites), applying data structures and algorithms to improve AI performance.<br>
+                • Worked with relational data design and database queries to preprocess and manage large datasets, enabling efficient data integration for NLP projects.<br>
+                • Automated data processing tasks in Python/MATLAB, boosting system efficiency by 40% and reducing manual work by 70%.<br>
+                • Utilized parallel computing techniques to optimize algorithm performance and enhance scalability.<br>
+                • Used version control (git) and modern IDEs for efficient development and collaboration in Linux environments.<br>
+                • Integrated REST APIs for enhanced system communication and utilized version control (git) for collaboration and workflow management.
+              </p>
+            </div>
+          </div>
+          
+          <div class="exp-item">
+            <div class="exp-date">June 2024 - August 2024</div>
+            <div>
+              <h3 class="exp-position">Software Engineer Intern</h3>
+              <p class="exp-company">EduTech4Space (Dubai, UAE)</p>
+              <p class="exp-description">
+                • Built interactive learning modules using JavaScript, React, HTML, and CSS, integrating Firebase for real-time updates; increased student engagement by 40%.<br>
+                • Applied data structures & algorithms to optimize content delivery and improve load times by 28% across devices.<br>
+                • Collaborated in an Agile environment, contributing to sprint planning, code reviews, and daily stand-ups with cross-functional teams.<br>
+                • Developed Python scripts (pandas, NumPy) to analyze student interaction data and support A/B testing, increasing user retention by 25%.<br>
+                • Implemented continuous integration workflows using GitHub Actions to automate testing and streamline deployment.<br>
+                • Authored technical documentation for UI components and internal engineering workflows, facilitating onboarding and knowledge sharing.
+              </p>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-date">January 2023 - Present</div>
+            <div>
+              <h3 class="exp-position">Tutor-Mentor</h3>
+              <p class="exp-company">TutorBright (Edmonton, AB)</p>
+              <p class="exp-description">
+                • Provided academic assistance to students in grades 5-12 in Mathematics, Social Studies, Science and Computer Science.<br>
+                • Developed lesson plans and study strategies tailored to individual students' needs and learning styles.<br>
+                • Utilized effective communication and interpersonal skills to build rapport with students and foster a positive learning environment.
+              </p>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-date">July 2023 - October 2023</div>
+            <div>
+              <h3 class="exp-position">Promotions and Multi-Channel Marketing Intern</h3>
+              <p class="exp-company">International Research Symposium in Service Management (Dubai, UAE)</p>
+              <p class="exp-description">
+                • Developed high-quality, engaging content such as blogs, articles, and videos and optimized the content for search engine optimization (SEO).<br>
+                • Analyzed data to identify trends, measure success metrics, and make data-driven recommendations for content optimization.<br>
+                • Collaborated with the web development team on various projects involving JavaScript.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        
+        <div id="thankyou-message" style="display:none; color: var(--teal); font-size: 1.5rem; text-align: center; margin-top: 2rem; padding: 2rem; background-color: rgba(157, 190, 187, 0.1); border-radius: 8px;">
+            Thank you for reaching out! I'll get back to you soon.
+          </div>
+          
+          <form id="contact-form" class="contact-form" action="https://formspree.io/f/xeogvnoy" method="POST">
+            <div class="form-group">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" id="name" name="name" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" name="email" class="form-input" required>
+            </div>
+            
+            <div class="form-group full">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-input" required>
+            </div>
+            
+            <div class="form-group full">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" name="message" class="form-textarea" required></textarea>
+            </div>
+            
+            <button type="submit" id="submit-btn" class="submit-btn">Send Message</button>
+          </form>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const form = document.getElementById('contact-form');
+              const thankYouMessage = document.getElementById('thankyou-message');
+              const submitButton = document.getElementById('submit-btn');
+              
+              form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Disable the submit button and change text
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+                
+                // Collect form data
+                const formData = new FormData(form);
+                
+                // Send data to Formspree
+                fetch(form.action, {
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                    'Accept': 'application/json'
+                  }
+                })
+                .then(response => {
+                  if (response.ok) {
+                    // Show thank you message
+                    form.style.display = 'none';
+                    thankYouMessage.style.display = 'block';
+                    
+                    // Scroll to the thank you message
+                    thankYouMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Reset form for future use (though it's hidden now)
+                    form.reset();
+                  } else {
+                    // Handle errors
+                    response.json().then(data => {
+                      if (data.errors) {
+                        alert("Oops! There was a problem submitting your form: " + 
+                              data.errors.map(error => error.message).join(", "));
+                      } else {
+                        alert("Oops! There was a problem submitting your form.");
+                      }
+                      
+                      // Re-enable submit button
+                      submitButton.disabled = false;
+                      submitButton.textContent = 'Send Message';
+                    });
+                  }
+                })
+                .catch(error => {
+                  // Handle network errors
+                  alert("Oops! There was a network problem. Please try again later.");
+                  console.error(error);
+                  
+                  // Re-enable submit button
+                  submitButton.disabled = false;
+                  submitButton.textContent = 'Send Message';
+                });
+              });
+            });
+          </script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const sidebar = document.getElementById('sidebarNav');
+              const sidebarToggle = document.getElementById('sidebarToggle');
+              const sidebarClose = document.getElementById('sidebarClose');
+              const sidebarLinks = document.querySelectorAll('.sidebar .nav-link');
+
+              // Open sidebar
+              sidebarToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.add('open');
+                sidebarToggle.style.display = 'none';
+              });
+
+              // Close sidebar
+              sidebarClose.addEventListener('click', function() {
+                sidebar.classList.remove('open');
+                sidebarToggle.style.display = 'block';
+              });
+
+              // Close sidebar when clicking a nav link
+              sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                  sidebar.classList.remove('open');
+                  sidebarToggle.style.display = 'block';
+                });
+              });
+
+              // Close sidebar when clicking outside
+              document.addEventListener('click', function(e) {
+                if (
+                  sidebar.classList.contains('open') &&
+                  !sidebar.contains(e.target) &&
+                  !sidebarToggle.contains(e.target)
+                ) {
+                  sidebar.classList.remove('open');
+                  sidebarToggle.style.display = 'block';
+                }
+              });
+
+              // Prevent sidebar click from closing itself
+              sidebar.addEventListener('click', function(e) {
+                e.stopPropagation();
+              });
+            });
+          </script>
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              const target = document.getElementById("typewriter");
+              const text   = "Ashlyn Benoy";
+              let   idx    = 0;
+              const speed  = 1000;
+          
+              function type() {
+                if (idx < text.length) {
+                  target.textContent += text.charAt(idx++);
+                  setTimeout(type, 100);
+                }
+              }
+              type();
+            });
+          </script>
+          <script>
+            const btn = document.getElementById('theme-toggle');
+            const root = document.documentElement;
+            // load saved theme or default to light
+            const saved = localStorage.getItem('theme') || 'light';
+            root.setAttribute('data-theme', saved);
+          
+            btn.addEventListener('click', () => {
+              const current = root.getAttribute('data-theme');
+              const next = current === 'light' ? 'dark' : 'light';
+              root.setAttribute('data-theme', next);
+              localStorage.setItem('theme', next);
+            });
+          </script>
+          
+          
+          
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <a href="#" class="footer-logo">portfolio.</a>
+        
+        <div class="footer-social">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/ashlyn-benoy-891492275/" 
+              class="social-link" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+          
+            <!-- GitHub -->
+            <a href="https://github.com/ashlynmaria" 
+              class="social-link" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 
+                  3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 
+                  6.44-7A5.44 5.44 0 0 0 20 4.77 
+                  5.07 5.07 0 0 0 19.91 1S18.73.65 
+                  16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 
+                  5.09 1 5.09 1A5.07 5.07 0 0 0 5 
+                  4.77a5.44 5.44 0 0 0-1.5 
+                  3.78c0 5.42 3.3 6.61 6.44 7A3.37 
+                  3.37 0 0 0 9 18.13V22">
+                </path>
+              </svg>
+            </a>
+          
+          </div>
+          
+              
