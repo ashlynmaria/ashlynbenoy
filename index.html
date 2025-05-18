@@ -45,7 +45,8 @@
       --icon-color: var(--link-color);
 
       /* Typewriter cursor */
-      --cursor-color: var(--link-color);
+      --cursor-color: #FFD6F3;
+
     }
     /*–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
     /* Dark-mode button & skill-pill text */
@@ -77,7 +78,8 @@
 
     /* keep your typewriter cursor visible too */
     [data-theme="dark"] #typewriter::after {
-      color: var(--link-color); /* or whatever bright accent you prefer */
+      color: var(--dark-purple); 
+      /* or whatever bright accent you prefer */
     }
 
     /* Apply to your components */
@@ -85,7 +87,11 @@
       background: var(--btn-primary-bg) !important;
       color:      var(--btn-primary-text) !important;
     }
-
+    #typewriter::after {
+      color: #FFD6F3; /* or white */
+      opacity: 1;
+      animation: blink 0.7s infinite;
+    }
     [data-theme="dark"] .btn-secondary {
       background: var(--btn-secondary-bg) !important;
       border-color: var(--btn-secondary-border) !important;
@@ -1140,11 +1146,149 @@
     html[data-theme="dark"] .skill {
       color: var(--purple) !important;
     }
+    
+    html[data-theme="dark"] #typewriter::after {
+      content: "|";
+      display: inline-block;
+      animation: blink 0.7s infinite;
+      color: var(--cursor-color) !important;
+    }
+    #music-consent {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    /* dialog box */
+    #music-consent .dialog {
+      background: var(--light-blue);
+      color: var(--rich-purple);
+      width: 320px;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* question text */
+    #music-consent .dialog p {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    /* button row */
+    #music-consent .dialog-buttons {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    /* the buttons */
+    #music-consent .dialog-buttons button {
+      min-width: 100px;
+      padding: 0.5rem 1rem;
+      background: var(--medium-pink);
+      color: var(--dark-purple);
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    /* hover state */
+    #music-consent .dialog-buttons button:hover {
+      background: var(--rich-purple);
+      color: var(--light-pink);
+        }
+    #music-consent .dialog {
+      color: #12030A; /* dark-purple */
+    }
+    #music-consent .dialog-buttons button {
+      /* make sure you’re already transitioning color */
+      transition: background 0.2s, color 0.2s;
+    }
+
+    #music-consent .dialog-buttons button:hover {
+      background: #512D38;  /* rich-purple */
+      color:      #FFFFFF;  /* pure white for max contrast */
+    }
+
+    /* ensure question copy is dark */
+    #music-consent .dialog p {
+      color: #12030A; /* dark-purple */
+    }
+
+    /* ==== Darken the button labels ==== */
+    #music-consent .dialog-buttons button {
+      color: #12030A; /* dark-purple */
+      font-weight: 600; /* optional: make ’em stand out even more */
+    }
+    /* Audio player (hidden controls by default) */
+    #bg-music {
+      display: block;
+      margin: 2rem auto 0;
+    }
+
+    /* CC-BY credit styling */
+    .music-credit {
+      font-size: 0.85rem;
+      color: var(--dark-purple);
+      text-align: center;
+      margin: 0.5rem auto 2rem;
+      max-width: 90%;
+      line-height: 1.4;
+    }
+    .music-credit a {
+      color: var(--light-blue);
+      text-decoration: none;
+    }
+    .music-credit a:hover {
+      text-decoration: underline;
+    }
+    
 
 
   </style>
 </head>
 <body>
+    <!-- ==== Music consent overlay ==== -->
+    <div id="music-consent">
+      <div class="dialog">
+        <p>Would you like to listen to some background music? :)</p>
+        <div class="dialog-buttons">
+          <button id="music-yes">yes, please!</button>
+          <button id="music-no">no, thank you!</button>
+        </div>
+      </div>
+    </div>
+
+  <!-- ==== Audio element (looping) ==== -->
+  <audio id="bg-music" src="assets/audio/background-music.mp3" loop></audio>
+
+  <!-- ==== CC-BY 3.0 Attribution ==== -->
+  <p class="music-credit">
+    Music: <em>Day Off</em> by
+    <a href="https://soundcloud.com/user-356546060" target="_blank" rel="noopener">
+      Tokyo Music Walker
+    </a>
+    (promoted via
+    <a href="https://www.chosic.com/free-music/all/" target="_blank" rel="noopener">
+      Chosic</a>)
+    — licensed under
+    <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">
+      CC BY 3.0
+    </a>.
+  </p>
+    
   <div class="custom-cursor"></div>
   <div class="cursor-dot"></div>
 
@@ -1601,6 +1745,21 @@
               localStorage.setItem('theme', next);
             });
           </script>
+            <script>
+              document.addEventListener('DOMContentLoaded', () => {
+                const music   = document.getElementById('bg-music');
+                const consent = document.getElementById('music-consent');
+          
+                document.getElementById('music-yes').addEventListener('click', () => {
+                  music.play().catch(e => console.error(e));
+                  consent.remove();
+                });
+          
+                document.getElementById('music-no').addEventListener('click', () => {
+                  consent.remove();
+                });
+              });
+            </script>
           
           
           
