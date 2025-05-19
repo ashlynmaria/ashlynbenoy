@@ -185,50 +185,65 @@
       --light-blue: #ADD1E8;
     }
 
-      /* Dialogflow Messenger → themed to your portfolio palette */
-    df-messenger {
-      /* bubble colors */
-      --df-messenger-bot-message: var(--light-pink);
-      --df-messenger-user-message: var(--medium-pink);
-      --df-messenger-font-color: var(--dark-purple);
-
-      /* header bar */
-      --df-messenger-button-titlebar-color: var(--rich-purple);
-      --df-messenger-button-titlebar-font-color: var(--light-pink);
-
-      /* chat background */
-      --df-messenger-chat-background-color: rgba(255,255,255,0.9);
-
-      /* input area */
-      --df-messenger-input-box-color: white;
-      --df-messenger-input-font-color: var(--dark-purple);
-      --df-messenger-input-placeholder-font-color: #727272;
-      --df-messenger-send-icon: var(--medium-pink);
-
-      /* position on page */
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    /* size & shape of the pop‐out window */
     df-messenger-chat {
-      width: 350px;
-      height: 450px;
-      max-height: 65vh;
-      border-radius: 10px !important;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.15) !important;
+      width: 380px;
+      height: 500px;
+      max-height: 70vh;
+      border-radius: 16px !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+      border: 2px solid var(--medium-pink) !important;
     }
 
-    /* fade‐in animation when opened */
+    /* Message bubbles adjustments */
+    df-messenger-chat .message-bot-content {
+      background-color: var(--light-pink) !important;
+      color: var(--dark-purple) !important;
+      border-radius: 18px 18px 18px 4px !important;
+      padding: 12px 16px !important;
+      font-weight: 500 !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+
+    df-messenger-chat .message-user-content {
+      background-color: var(--medium-pink) !important;
+      color: white !important;
+      border-radius: 18px 18px 4px 18px !important;
+      padding: 12px 16px !important;
+      font-weight: 500 !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(15px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     df-messenger[expanded="true"] df-messenger-chat {
       animation: fadeIn 0.3s ease-out;
+    }
+
+    /* Improve message bubbles spacing */
+    df-message {
+      margin-bottom: 10px !important;
+    }
+
+    /* Custom scrollbar for chat area */
+    df-messenger-chat::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    df-messenger-chat::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    df-messenger-chat::-webkit-scrollbar-thumb {
+      background: var(--light-pink);
+      border-radius: 10px;
+    }
+
+    df-messenger-chat::-webkit-scrollbar-thumb:hover {
+      background: var(--medium-pink);
     }
 
     
