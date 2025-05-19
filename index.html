@@ -169,6 +169,13 @@
       color:    var(--text-secondary);
       opacity: 1;
     }
+    @media (max-width: 768px) {
+      df-messenger-chat {
+        width: 90vw;
+        right: 5vw;
+        left: 5vw;
+      }
+    }
 
     :root {
       --rich-purple: #512D38;
@@ -177,6 +184,53 @@
       --dark-purple: #12030A;
       --light-blue: #ADD1E8;
     }
+
+      /* Dialogflow Messenger → themed to your portfolio palette */
+    df-messenger {
+      /* bubble colors */
+      --df-messenger-bot-message: var(--light-pink);
+      --df-messenger-user-message: var(--medium-pink);
+      --df-messenger-font-color: var(--dark-purple);
+
+      /* header bar */
+      --df-messenger-button-titlebar-color: var(--rich-purple);
+      --df-messenger-button-titlebar-font-color: var(--light-pink);
+
+      /* chat background */
+      --df-messenger-chat-background-color: rgba(255,255,255,0.9);
+
+      /* input area */
+      --df-messenger-input-box-color: white;
+      --df-messenger-input-font-color: var(--dark-purple);
+      --df-messenger-input-placeholder-font-color: #727272;
+      --df-messenger-send-icon: var(--medium-pink);
+
+      /* position on page */
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    /* size & shape of the pop‐out window */
+    df-messenger-chat {
+      width: 350px;
+      height: 450px;
+      max-height: 65vh;
+      border-radius: 10px !important;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15) !important;
+    }
+
+    /* fade‐in animation when opened */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    df-messenger[expanded="true"] df-messenger-chat {
+      animation: fadeIn 0.3s ease-out;
+    }
+
     
     * {
       margin: 0;
@@ -1123,6 +1177,8 @@
       background: var(--bg-gradient);
       color: var(--text);
     }
+
+
     #theme-toggle {
       background: none;
       border: none;
@@ -1141,6 +1197,19 @@
     html[data-theme="dark"] .exp-date,
     html[data-theme="dark"] .exp-company {
       color: var(--text) !important;
+    }
+    /* ==== Darken music credit in light mode ==== */
+    :root:not([data-theme="dark"]) {
+      /* pick a darker purple (or #000 if you prefer) */
+      --music-credit-color: #512D38;
+    }
+    
+    .music-credit {
+      color: var(--music-credit-color) !important;
+    }
+
+    .music-credit a {
+      color: var(--music-credit-color) !important;
     }
 
     html[data-theme="dark"] .skill {
@@ -1254,6 +1323,83 @@
     .music-credit a:hover {
       text-decoration: underline;
     }
+    #chatbot-wrapper {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      font-family: inherit;
+    }
+    #chatbot-toggle {
+      background: var(--medium-pink);
+      color: var(--dark-purple);
+      border: none;
+      border-radius: 50%;
+      width: 3.5rem;
+      height: 3.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    #chatbot-window {
+      width: 300px;
+      max-height: 400px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    #chatbot-window.hidden {
+      display: none;
+    }
+    #chatbot-messages {
+      flex: 1;
+      padding: 0.75rem;
+      overflow-y: auto;
+      color: var(--text);
+    }
+    #chatbot-input-row {
+      display: flex;
+      border-top: 1px solid rgba(81,45,56,0.2);
+    }
+    #chatbot-input {
+      flex: 1;
+      border: none;
+      padding: 0.5rem;
+      background: var(--input-bg);
+      color: var(--text);
+    }
+    #chatbot-send {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border: none;
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+    #chatbot-send:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* ── Message bubbles ── */
+    .message {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+    .message.user {
+      background: rgba(173,209,232,0.5);
+      text-align: right;
+    }
+    .message.bot {
+      background: rgba(244,191,219,0.5);
+      text-align: left;
+    }
+    .message.error {
+      color: red;
+    }
     
 
 
@@ -1276,10 +1422,9 @@
 
   <!-- ==== CC-BY 3.0 Attribution ==== -->
   <p class="music-credit">
-    Music: <em>Day Off</em> by
+    Music: <em>Day Off</em>&nbsp;by
     <a href="https://soundcloud.com/user-356546060" target="_blank" rel="noopener">
-      Tokyo Music Walker
-    </a>
+      Tokyo Music Walker</a>
     (promoted via
     <a href="https://www.chosic.com/free-music/all/" target="_blank" rel="noopener">
       Chosic</a>)
@@ -1761,11 +1906,21 @@
               });
             </script>
           
-          
-          
       </div>
     </section>
+    
   </main>
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <df-messenger
+    intent="WELCOME"
+    chat-title="PortfolioBot"
+    agent-id="d4c18101-1c40-4998-a1fa-dc8ec4ed4377"
+    language-code="en"
+  ></df-messenger>
+  </body>
+  </html>
+  
+  
 
   <footer class="footer">
     <div class="container">
