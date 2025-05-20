@@ -169,13 +169,7 @@
       color:    var(--text-secondary);
       opacity: 1;
     }
-    @media (max-width: 768px) {
-      df-messenger-chat {
-        width: 90vw;
-        right: 5vw;
-        left: 5vw;
-      }
-    }
+    
 
     :root {
       --rich-purple: #512D38;
@@ -183,68 +177,84 @@
       --light-pink: #F4BFDB;
       --dark-purple: #12030A;
       --light-blue: #ADD1E8;
-    }
 
+      --df-rich-purple: #512D38;
+      --df-dark-purple: #12030A;
+    }
+    df-messenger {
+    /* bubble background colors you already set… */
+    --df-messenger-bot-message: var(--light-pink);
+    --df-messenger-user-message: var(--medium-pink);
+
+    /* make all text pitch-black */
+    --df-messenger-font-color: #000000 !important;
+    --df-messenger-input-font-color: #000000 !important;
+
+    /* keep header bar in your purple/pink */
+    --df-messenger-button-titlebar-color: var(--rich-purple);
+    --df-messenger-button-titlebar-font-color: var(--light-pink);
+
+    /* translucent white chat background */
+    --df-messenger-chat-background-color: rgba(255,255,255,0.9);
+
+    /* input field styling */
+    --df-messenger-input-box-color: #FFFFFF;
+    --df-messenger-input-placeholder-font-color: #727272;
+    --df-messenger-send-icon: var(--medium-pink);
+
+    /* position */
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 1000 !important;
+  }
+
+  /* Outline the whole chat window */
+  df-messenger-chat {
+    border: 2px solid var(--dark-purple) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15) !important;
+    width: 350px !important;
+    height: 450px !important;
+    max-height: 65vh !important;
+  }
+
+  /* Outline each bubble */
+  df-messenger::part(bot-message),
+  df-messenger::part(user-message) {
+    border: 1px solid var(--dark-purple) !important;
+    border-radius: 8px !important;
+  }
+
+  /* Outline the input wrapper */
+  df-messenger::part(input-wrapper) {
+    border: 1px solid var(--dark-purple) !important;
+    border-radius: 4px !important;
+  }
+
+  /* Keep send icon pink */
+  df-messenger::part(send-button) {
+    color: var(--medium-pink) !important;
+  }
+
+  /* Fade-in animation when it opens */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  df-messenger[expanded="true"] df-messenger-chat {
+    animation: fadeIn 0.3s ease-out !important;
+  }
+
+  /* Mobile: full-width */
+  @media (max-width: 768px) {
     df-messenger-chat {
-      width: 380px;
-      height: 500px;
-      max-height: 70vh;
-      border-radius: 16px !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
-      border: 2px solid var(--medium-pink) !important;
+      width: 90vw !important;
+      left: 5vw !important;
+      right: 5vw !important;
     }
+  }
 
-    /* Message bubbles adjustments */
-    df-messenger-chat .message-bot-content {
-      background-color: var(--light-pink) !important;
-      color: var(--dark-purple) !important;
-      border-radius: 18px 18px 18px 4px !important;
-      padding: 12px 16px !important;
-      font-weight: 500 !important;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-    }
-
-    df-messenger-chat .message-user-content {
-      background-color: var(--medium-pink) !important;
-      color: white !important;
-      border-radius: 18px 18px 4px 18px !important;
-      padding: 12px 16px !important;
-      font-weight: 500 !important;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    df-messenger[expanded="true"] df-messenger-chat {
-      animation: fadeIn 0.3s ease-out;
-    }
-
-    /* Improve message bubbles spacing */
-    df-message {
-      margin-bottom: 10px !important;
-    }
-
-    /* Custom scrollbar for chat area */
-    df-messenger-chat::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    df-messenger-chat::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-
-    df-messenger-chat::-webkit-scrollbar-thumb {
-      background: var(--light-pink);
-      border-radius: 10px;
-    }
-
-    df-messenger-chat::-webkit-scrollbar-thumb:hover {
-      background: var(--medium-pink);
-    }
 
     
     * {
@@ -1168,6 +1178,25 @@
 
     /* Dark mode overrides */
   [data-theme="dark"] {
+    /* bubble fills → switch to purples */
+    --df-messenger-user-message:   #512D38 !important;  /* rich-purple */
+    --df-messenger-bot-message:    #12030A !important;  /* dark-purple */
+
+    /* all chat text → keep high contrast */
+    --df-messenger-font-color:     #FFFFFF !important;
+    --df-messenger-input-font-color: #FFFFFF !important;
+
+    /* header bar */
+    --df-messenger-button-titlebar-color:      #512D38 !important;
+    --df-messenger-button-titlebar-font-color: #F4BFDB !important;
+
+    /* chat window bg */
+    --df-messenger-chat-background-color: rgba(18,3,10,0.8) !important;
+
+    /* input area */
+    --df-messenger-input-box-color:             rgba(30,15,25,0.5) !important;
+    --df-messenger-input-placeholder-font-color:#BBBBBB !important;
+    --df-messenger-send-icon:                   #B27092 !important; /* medium-pink accent */
     /* background gradient */
     --bg-gradient: linear-gradient(135deg, #12030A, #512D38);
 
@@ -1346,15 +1375,17 @@
       font-family: inherit;
     }
     #chatbot-toggle {
-      background: var(--medium-pink);
-      color: var(--dark-purple);
+      background: url('assets/icons/your-new-icon.png') no-repeat center center / cover;
       border: none;
-      border-radius: 50%;
       width: 3.5rem;
       height: 3.5rem;
-      font-size: 1.5rem;
       cursor: pointer;
     }
+    df-messenger > df-messenger-chat,
+    df-messenger > df-messenger-button {
+      display: none !important;
+    }
+
     #chatbot-window {
       width: 300px;
       max-height: 400px;
@@ -1437,7 +1468,7 @@
 
   <!-- ==== CC-BY 3.0 Attribution ==== -->
   <p class="music-credit">
-    Music: <em>Day Off</em>&nbsp;by
+    Music: <em>Day Off</em> by
     <a href="https://soundcloud.com/user-356546060" target="_blank" rel="noopener">
       Tokyo Music Walker</a>
     (promoted via
@@ -1926,11 +1957,15 @@
     
   </main>
   <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  
+  
+  
   <df-messenger
     intent="WELCOME"
     chat-title="PortfolioBot"
     agent-id="d4c18101-1c40-4998-a1fa-dc8ec4ed4377"
     language-code="en"
+    chat-icon="assets/icons/your-new-icon.png"> 
   ></df-messenger>
   </body>
   </html>
