@@ -53,12 +53,12 @@
     [data-theme="dark"] .btn-primary,
     [data-theme="dark"] .btn-secondary {
       /* make the text inside your primary/secondary buttons dark */
-      color: var(--dark-purple) !important;
+      color: #12030A !important;
     }
 
     [data-theme="dark"] .skill {
       /* make the text inside the skill pills dark */
-      color: var(--dark-purple) !important;
+      color: #12030A !important;
     }
 
 
@@ -67,25 +67,25 @@
     [data-theme="dark"] .btn-primary,
     [data-theme="dark"] .btn-secondary,
     [data-theme="dark"] .submit-btn {
-      /* use your dark-purple for maximum contrast */
-      color: var(--dark-purple) !important;
+      /* use #12030A for maximum contrast */
+      color: #12030A !important;
     }
 
     [data-theme="dark"] .skill {
       /* skill pills */
-      color: var(--dark-purple) !important;
+      color: #12030A !important;
     }
 
     /* keep your typewriter cursor visible too */
     [data-theme="dark"] #typewriter::after {
-      color: var(--dark-purple); 
+      color: #12030A; 
       /* or whatever bright accent you prefer */
     }
 
     /* Apply to your components */
     [data-theme="dark"] .btn-primary {
       background: var(--btn-primary-bg) !important;
-      color:      var(--btn-primary-text) !important;
+      color:      #12030A !important; /* Ensure dark text */
     }
     #typewriter::after {
       color: #FFD6F3; /* or white */
@@ -129,9 +129,7 @@
     .project-title,
     .project-description,
     .about-content p,
-    .exp-date,
     .exp-position,
-    .exp-company,
     .exp-description,
     .form-label {
       color: var(--text);
@@ -143,7 +141,6 @@
     .footer-logo,
     .nav-link,
     .project-link,
-    .btn-primary,
     .btn-secondary,
     .footer-social .social-link {
       color: var(--link-color);
@@ -516,9 +513,9 @@
     /* your existing overrides… */
 
     --df-messenger-button-titlebar-font-color: #512D38 !important;  /* light text */
-    --df-messenger-minimized-chat-close-icon-color: #512D38  !important;  /* light “×” */
+    --df-messenger-minimized-chat-close-icon-color: #512D38  !important;  /* light "×" */
 
-    /* in case the expanded header “×” uses the same var: */
+    /* in case the expanded header "×" uses the same var: */
     --df-messenger-chat-close-icon-color: #E0E0E0 !important;
   }
 
@@ -756,7 +753,7 @@
     }
     
     .exp-date {
-      color: #512D38;
+      color: #512D38; /* Original light mode color */
       font-weight: 600;
     }
     
@@ -768,7 +765,7 @@
     }
     
     .exp-company {
-      color: #7a3c5a;
+      color: #7a3c5a; /* Original light mode color */
       margin-bottom: 1rem;
       font-weight: 500;
     }
@@ -826,7 +823,7 @@
     
     .submit-btn {
       background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
-      color: var(--light-pink);
+      color: var(--light-pink); /* Original light mode color */
       border: none;
       padding: 0.75rem 1.5rem;
       border-radius: 6px;
@@ -1117,6 +1114,94 @@
     .sidebar-close:hover {
       color: var(--light-blue);
     }
+    .music-switch {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--rich-purple);
+      cursor: pointer;
+      user-select: none;
+      z-index: 1100;
+      background: var(--card-bg);
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      box-shadow: 0 2px 8px rgba(81, 45, 56, 0.1);
+      border: 1px solid rgba(81, 45, 56, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .music-switch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(81, 45, 56, 0.15);
+    }
+
+    .music-switch .toggle {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      background: rgba(81, 45, 56, 0.2);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .music-switch .toggle::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      background: var(--rich-purple);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(81, 45, 56, 0.2);
+    }
+
+    .music-switch input:checked + .toggle {
+      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
+    }
+
+    .music-switch input:checked + .toggle::before {
+      transform: translateX(16px);
+      background: var(--light-pink);
+    }
+
+    .music-switch input {
+      display: none;
+    }
+
+    .music-switch span {
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    [data-theme="dark"] .music-switch {
+      color: var(--light-pink);
+      background: var(--card-bg);
+      border-color: rgba(244, 191, 219, 0.2);
+    }
+
+    [data-theme="dark"] .music-switch .toggle {
+      background: rgba(244, 191, 219, 0.2);
+    }
+
+    [data-theme="dark"] .music-switch .toggle::before {
+      background: var(--light-pink);
+    }
+
+    [data-theme="dark"] .music-switch input:checked + .toggle {
+      background: linear-gradient(45deg, var(--medium-pink), var(--light-blue));
+    }
+
+    [data-theme="dark"] .music-switch input:checked + .toggle::before {
+      transform: translateX(16px);
+      background: var(--light-blue);
+    }
+
     .sidebar-links {
       display: flex;
       flex-direction: column;
@@ -1196,7 +1281,7 @@
       /* light theme colors */
       --bg-gradient: linear-gradient(135deg, var(--light-pink), var(--light-blue));
       --text: var(--rich-purple);
-      /* …and any other “light” variables */
+      /* …and any other "light" variables */
     }
 
     /* Dark mode overrides */
@@ -1246,25 +1331,68 @@
     }
 
 
+    /* Theme Toggle Button */
     #theme-toggle {
-      background: none;
-      border: none;
+      background: var(--card-bg); /* Use card background for consistency */
+      border: 1px solid rgba(81, 45, 56, 0.2); /* Subtle border */
+      width: 44px; /* Fixed width */
+      height: 44px; /* Fixed height for a circle/square */
+      border-radius: 50%; /* Make it circular */
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.2rem;
       cursor: pointer;
-      color: var(--text);
-      transition: color 0.3s;
-      margin-left: auto; /* push it to the right if you like */
+      color: var(--rich-purple); /* Default color */
+      transition: all 0.3s ease; /* Smooth transitions for all properties */
+      margin-left: auto;
+      margin-right: 0.5rem; /* Add space to the right */
+      box-shadow: 0 2px 8px rgba(81, 45, 56, 0.1); /* Subtle shadow */
     }
-    /* make all buttons use dark-purple text in dark mode */
-    html[data-theme="dark"] .btn-primary,
-    html[data-theme="dark"] .submit-btn {
-      /* this is your #12030A dark-purple color */
-      color: var(--purple) !important;
+
+    #theme-toggle:hover {
+      background: var(--medium-pink); /* Hover effect */
+      color: var(--light-pink); /* Change icon color on hover */
+      box-shadow: 0 4px 12px rgba(81, 45, 56, 0.15);
+      transform: translateY(-2px); /* Lift effect */
     }
-    html[data-theme="dark"] .exp-date,
-    html[data-theme="dark"] .exp-company {
-      color: var(--text) !important;
+
+    #theme-toggle svg {
+      width: 24px; /* Icon size */
+      height: 24px;
     }
+
+    /* Hide sun icon in light mode, show moon */
+    html[data-theme="light"] #theme-toggle .sun-icon {
+      display: none;
+    }
+    html[data-theme="light"] #theme-toggle .moon-icon {
+      display: block;
+      color: var(--rich-purple); /* Moon icon color in light mode */
+    }
+
+    /* Hide moon icon in dark mode, show sun */
+    html[data-theme="dark"] #theme-toggle {
+      color: var(--light-pink); /* Default icon color in dark mode */
+      background: var(--card-bg);
+      border-color: rgba(244, 191, 219, 0.2);
+      box-shadow: 0 2px 8px rgba(18, 3, 10, 0.2);
+    }
+
+    html[data-theme="dark"] #theme-toggle:hover {
+      background: var(--light-pink); /* Hover effect in dark mode */
+      color: var(--rich-purple); /* Change icon color on hover */
+      box-shadow: 0 4px 12px rgba(18, 3, 10, 0.3);
+    }
+
+    html[data-theme="dark"] #theme-toggle .sun-icon {
+      display: block;
+      color: var(--light-pink); /* Sun icon color in dark mode */
+    }
+    html[data-theme="dark"] #theme-toggle .moon-icon {
+      display: none;
+    }
+
     /* ==== Darken music credit in light mode ==== */
     :root:not([data-theme="dark"]) {
       /* pick a darker purple (or #000 if you prefer) */
@@ -1289,85 +1417,7 @@
       animation: blink 0.7s infinite;
       color: var(--cursor-color) !important;
     }
-    #music-consent {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    /* dialog box */
-    #music-consent .dialog {
-      background: var(--light-blue);
-      color: var(--rich-purple);
-      width: 320px;
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    /* question text */
-    #music-consent .dialog p {
-      margin: 0;
-      font-size: 1.1rem;
-      line-height: 1.4;
-    }
-
-    /* button row */
-    #music-consent .dialog-buttons {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    /* the buttons */
-    #music-consent .dialog-buttons button {
-      min-width: 100px;
-      padding: 0.5rem 1rem;
-      background: var(--medium-pink);
-      color: var(--dark-purple);
-      border: none;
-      border-radius: 4px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    /* hover state */
-    #music-consent .dialog-buttons button:hover {
-      background: var(--rich-purple);
-      color: var(--light-pink);
-        }
-    #music-consent .dialog {
-      color: #12030A; /* dark-purple */
-    }
-    #music-consent .dialog-buttons button {
-      /* make sure you’re already transitioning color */
-      transition: background 0.2s, color 0.2s;
-    }
-
-    #music-consent .dialog-buttons button:hover {
-      background: #512D38;  /* rich-purple */
-      color:      #FFFFFF;  /* pure white for max contrast */
-    }
-
-    /* ensure question copy is dark */
-    #music-consent .dialog p {
-      color: #12030A; /* dark-purple */
-    }
-
-    /* ==== Darken the button labels ==== */
-    #music-consent .dialog-buttons button {
-      color: #12030A; /* dark-purple */
-      font-weight: 600; /* optional: make ’em stand out even more */
-    }
+    
     /* Audio player (hidden controls by default) */
     #bg-music {
       display: block;
@@ -1475,23 +1525,13 @@
   </style>
 </head>
 <body>
-    <!-- ==== Music consent overlay ==== -->
-    <div id="music-consent">
-      <div class="dialog">
-        <p>Would you like to listen to some background music? :)</p>
-        <div class="dialog-buttons">
-          <button id="music-yes">yes, please!</button>
-          <button id="music-no">no, thank you!</button>
-        </div>
-      </div>
-    </div>
 
   <!-- ==== Audio element (looping) ==== -->
   <audio id="bg-music" src="assets/audio/background-music.mp3" loop></audio>
 
   <!-- ==== CC-BY 3.0 Attribution ==== -->
-  <p class="music-credit">
-    Music: <em>Day Off</em> by
+  <p class="music-credit">Music:
+    <em style="margin-right: 5px;"> Day Off</em>by
     <a href="https://soundcloud.com/user-356546060" target="_blank" rel="noopener">
       Tokyo Music Walker</a>
     (promoted via
@@ -1510,7 +1550,25 @@
   <nav class="sidebar" id="sidebarNav">
     <div class="sidebar-header">
       <a href="#" class="logo">portfolio.</a>
-      <button id="theme-toggle" aria-label="Toggle dark mode">🌓</button>
+      <button id="theme-toggle" aria-label="Toggle dark mode">
+        <!-- Sun Icon (for dark mode) -->
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12
+            "></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (for light mode) -->
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
       <button class="sidebar-close" id="sidebarClose">✕</button>
     </div>
     <div class="sidebar-links">
@@ -1957,23 +2015,43 @@
               const next = current === 'light' ? 'dark' : 'light';
               root.setAttribute('data-theme', next);
               localStorage.setItem('theme', next);
+              
+              // The icons are controlled purely by CSS based on the data-theme attribute,
+              // so no direct icon manipulation is needed here.
             });
           </script>
-            <script>
-              document.addEventListener('DOMContentLoaded', () => {
-                const music   = document.getElementById('bg-music');
-                const consent = document.getElementById('music-consent');
-          
-                document.getElementById('music-yes').addEventListener('click', () => {
-                  music.play().catch(e => console.error(e));
-                  consent.remove();
-                });
-          
-                document.getElementById('music-no').addEventListener('click', () => {
-                  consent.remove();
-                });
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              const music  = document.getElementById('bg-music');
+              const toggle = document.getElementById('music-toggle');
+            
+              // 1. Restore saved state
+              const saved = localStorage.getItem('bgMusic') || 'off';
+              if (saved === 'on') {
+                music.play().catch(() => {});
+                toggle.checked = true;
+              }
+            
+              // 2. Wire up the switch
+              toggle.addEventListener('change', () => {
+                if (toggle.checked) {
+                  music.play().catch(console.error);
+                  localStorage.setItem('bgMusic', 'on');
+                } else {
+                  music.pause();
+                  music.currentTime = 0;
+                  localStorage.setItem('bgMusic', 'off');
+                }
               });
+            });
             </script>
+            <label class="music-switch">
+              <input type="checkbox" id="music-toggle">
+              <span class="toggle"></span>
+              <span>🎵 Music</span>
+            </label>
+            
+            
           
       </div>
     </section>
