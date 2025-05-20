@@ -511,6 +511,29 @@
       background: linear-gradient(90deg, var(--rich-purple), var(--medium-pink));
       animation: pulse 2s infinite;
     }
+    /* make the header text and close-button icon light in dark mode */
+  [data-theme="dark"] df-messenger {
+    /* your existing overrides… */
+
+    --df-messenger-button-titlebar-font-color: #512D38 !important;  /* light text */
+    --df-messenger-minimized-chat-close-icon-color: #512D38  !important;  /* light “×” */
+
+    /* in case the expanded header “×” uses the same var: */
+    --df-messenger-chat-close-icon-color: #E0E0E0 !important;
+  }
+
+  /* safety-net: target the internal parts directly */
+  df-messenger::part(title),
+  df-messenger::part(header-title) {
+    color: #E0E0E0 !important;
+  }
+
+  df-messenger::part(minimize-button),
+  df-messenger::part(close-button),
+  df-messenger::part(minimized-close-button) {
+    color: #E0E0E0 !important;
+  }
+
     
     .projects {
       display: grid;
