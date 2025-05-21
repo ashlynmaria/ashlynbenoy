@@ -180,6 +180,7 @@
       --light-pink: #F4BFDB;
       --dark-purple: #12030A;
       --light-blue: #ADD1E8;
+      --light-yellow: #FAE3C6
 
       --df-rich-purple: #512D38;
       --df-dark-purple: #12030A;
@@ -540,9 +541,9 @@
     
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin-top: 3rem;
+      padding: 2rem 0;
     }
     
     .project-card {
@@ -626,7 +627,7 @@
     }
     
     .project-link {
-      color: var(--rich-purple);
+      color: rgba(228, 233, 255, 0.75);
       text-decoration: none;
       font-size: 0.85rem;
       display: flex;
@@ -1867,6 +1868,17 @@
     .message.error {
       color: red;
     }
+    /* Dates a bit more prominent */
+[data-theme="dark"] .exp-date {
+  color: rgba(228, 233, 255, 0.75) !important;
+}
+/* Company names slightly muted */
+[data-theme="dark"] .exp-company {
+  color: rgba(228, 233, 255, 0.75) !important;
+}
+
+
+
     
 
 
@@ -1980,8 +1992,7 @@
               <h3 class="project-title">Streamly</h3>
               <p class="project-description">A decentralized social platform with Docker-based deployment and RESTful APIs. Features include GitHub activity feed integration, user relationship graphs for post visibility control, and comprehensive REST APIs for identity and friend management.</p>
               <div class="project-links">
-                <a href="#" class="project-link">View Live →</a>
-                <a href="#" class="project-link">View Code →</a>
+                <a href="https://www.youtube.com/watch?v=eP_R_QzpfYU" class="project-link">View →</a>
               </div>
             </div>
           </div>
@@ -2006,8 +2017,7 @@
               <h3 class="project-title">EventEase</h3>
               <p class="project-description">An Android application for QR-based event check-in with real-time tracking and automated notifications. Achieved 97% test coverage and implemented CI/CD pipelines for streamlined deployment.</p>
               <div class="project-links">
-                <a href="#" class="project-link">View Live →</a>
-                <a href="#" class="project-link">View Code →</a>
+                <a href="#" class="project-link">View →</a>
               </div>
             </div>
           </div>
@@ -2031,8 +2041,7 @@
               <h3 class="project-title">TweetHub</h3>
               <p class="project-description">A tweet management tool with batch processing capabilities and optimized query performance. Features include a sophisticated ranking system for tweets and users, reducing search time by 30%.</p>
               <div class="project-links">
-                <a href="#" class="project-link">View Live →</a>
-                <a href="#" class="project-link">View Code →</a>
+                <a href="#" class="project-link">View →</a>
               </div>
             </div>
           </div>
