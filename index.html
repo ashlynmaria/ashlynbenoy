@@ -29,6 +29,12 @@
       /* form field backgrounds */
       --input-bg: rgba( 30, 15, 25, 0.5 );
     }
+    .skill-logo img {
+      width: 100px;
+      height: auto;   /* preserves aspect ratio */
+      display: block; /* removes any descender whitespace */
+    }
+
     /*–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
     /* DARK‐MODE BUTTONS, FOOTER, ICONS & CURSOR OVERRIDES */
     [data-theme="dark"] {
@@ -636,100 +642,219 @@
     }
     
     .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      display: flex; /* Use flexbox for side-by-side layout */
+      align-items: center; /* Vertically center items */
+      gap: 4rem; /* Space between image and text */
+      flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+      flex-direction: row; /* Ensure image is on the left by default */
     }
     
+    /* force illustration to hold its aspect ratio & not shrink too small */
     .about-image {
-      position: relative;
-      z-index: 1;
-      display: flex;
+      flex: 0 0 400px; /* Give the image container a base width, allow shrinking */
+      max-width: 100%; /* Ensure it doesn't exceed container width */
+      display: flex; /* Use flex to center image and credit */
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      max-width: 400px;
-      margin: 0 auto;
-      overflow: hidden;
     }
     
-    .about-image::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      width: calc(100% + 40px);
-      height: calc(100% + 40px);
-      border: 2px solid var(--medium-pink);
-      z-index: -1;
-      animation: borderPulse 4s infinite ease-in-out;
-    }
-    
+    /* keep the unDraw image centered & at a sane max size */
     .about-image img {
       width: 100%;
-      height: auto;
-      max-width: 350px;
-      max-height: 350px;
-      object-fit: contain;
-      border-radius: 12px;
+      height: auto; /* Maintain aspect ratio */
+      max-width: 350px; /* Max size for the image */
+      max-height: 350px; /* Max height to prevent excessive vertical space */
+      object-fit: contain; /* Ensure the whole image is visible */
+      border-radius: 12px; /* Match other rounded elements */
       filter: drop-shadow(0 5px 15px rgba(81, 45, 56, 0.2));
       transition: all 0.5s ease;
       display: block;
     }
     
+    /* credit sits just below it in a tighter style */
     .image-credit {
-      display: block;
-      margin-top: 2rem;
-      color: var(--rich-purple);
-      font-size: 0.8rem;
+      margin-top: 1rem; /* Space above credit */
+      font-size: 0.8rem; /* Slightly larger font size */
       text-align: center;
-    }
-    .image-credit a {
-      color: var(--medium-pink);
-      text-decoration: underline;
-      transition: color 0.3s ease;
-    }
-    .image-credit a:hover {
-      color: var(--rich-purple);
+      color: var(--dark-purple); /* Default light mode color */
     }
     
-    .about-image:hover img {
-      transform: scale(1.03);
-      filter: drop-shadow(0 8px 20px rgba(81, 45, 56, 0.3));
+    [data-theme="dark"] .image-credit {
+      color: var(--text-secondary); /* Dark mode color for credit */
     }
     
+    /* content paragraph sizing & color */
+    .about-content {
+      flex: 1; /* Allow text content to take up remaining space */
+      min-width: 300px; /* Ensure text doesn't get too narrow */
+    }
     .about-content p {
-      color: var(--dark-purple);
-      margin-bottom: 1.5rem;
-      line-height: 1.7;
+      color: var(--dark-purple); /* Default light mode color */
+      font-size: 1rem;
+      line-height: 1.7; /* Improved readability */
+      margin-bottom: 1.5rem; /* Space between paragraphs */
     }
     
-    .skills {
+    [data-theme="dark"] .about-content p {
+      color: var(--text); /* Dark mode color for paragraphs */
+    }
+    
+    /* ─── Skill carousel tweaks ─── */
+    .skills-slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin-top: 3rem;
+      padding: 1rem 0; /* Add vertical padding */
+      /* Height will be determined by content */
+    }
+    
+    .skills-track {
+      display: flex; /* Use flex for horizontal layout */
+      white-space: nowrap; /* Keep items on a single line for animation */
+      animation: scroll-left 40s linear infinite; /* Adjusted duration */
+      width: fit-content; /* Ensure track is wide enough */
+    }
+    
+    .skills-track:hover {
+      animation-play-state: paused;
+    }
+    
+    .skills-track .skill-item {
+      flex: 0 0 auto;
+      margin-right: 2rem; /* Space between items */
+      display: flex; /* Use flex for vertical layout within item */
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; /* Align content to top */
+      min-width: 100px; /* Ensure minimum width for item */
+    }
+    
+    /* shift exactly half the total width (because content is duplicated) */
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    .skill-logo {
+      width: 80px; /* Consistent logo size */
+      height: 80px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    
-    .skill {
-      background: linear-gradient(45deg, rgba(244, 191, 219, 0.8), rgba(173, 209, 232, 0.8));
-      color: var(--rich-purple);
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      font-size: 0.9rem;
+      align-items: center;
+      justify-content: center;
+      background: rgba(244, 191, 219, 0.1); /* Light mode background */
+      border-radius: 16px;
+      padding: 1rem;
       transition: all 0.3s ease;
-      border: 1px solid rgba(81, 45, 56, 0.1);
+      border: 1px solid rgba(81, 45, 56, 0.1); /* Light mode border */
+      box-shadow: 0 4px 6px rgba(81, 45, 56, 0.1); /* Light mode shadow */
+    }
+    
+    [data-theme="dark"] .skill-logo {
+      background: rgba(244, 191, 219, 0.05); /* Dark mode background */
+      border-color: rgba(244, 191, 219, 0.2); /* Dark mode border */
+      box-shadow: 0 4px 6px rgba(18, 3, 10, 0.2); /* Dark mode shadow */
+    }
+    
+    .skill-item:hover .skill-logo {
+      background: rgba(244, 191, 219, 0.2); /* Hover light mode background */
+      box-shadow: 0 8px 15px rgba(81, 45, 56, 0.15); /* Hover light mode shadow */
+      border-color: var(--medium-pink); /* Hover light mode border */
+    }
+    
+    [data-theme="dark"] .skill-item:hover .skill-logo {
+      background: rgba(244, 191, 219, 0.1); /* Hover dark mode background */
+      box-shadow: 0 8px 15px rgba(18, 3, 10, 0.3); /* Hover dark mode shadow */
+    }
+    
+    .skill-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: grayscale(100%); /* Default grayscale */
+      transition: all 0.3s ease;
+    }
+    
+    .skill-item:hover .skill-logo img {
+      filter: grayscale(0%); /* Color on hover */
+      transform: scale(1.1);
+    }
+    
+    .skill-name {
+      font-size: 0.9rem; /* Readable font size */
       font-weight: 500;
+      color: var(--dark-purple); /* Default light mode color for text */
+      text-align: center;
+      transition: color 0.3s ease;
+      margin-top: 0.5rem; /* Space above text */
     }
     
-    .skill:hover {
-      background: linear-gradient(45deg, var(--rich-purple), var(--medium-pink));
-      color: var(--light-pink);
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(81, 45, 56, 0.3);
+    [data-theme="dark"] .skill-name {
+      color: var(--text); /* Dark mode color - should be light */
     }
     
+    .skill-item:hover .skill-name {
+      color: var(--medium-pink); /* Hover light mode color */
+    }
+    
+    [data-theme="dark"] .skill-item:hover .skill-name {
+      color: var(--light-blue); /* Hover dark mode color */
+    }
+    
+    /* Responsive adjustments for About section */
+    @media (max-width: 992px) {
+      .about {
+        flex-direction: column; /* Stack image and text */
+        gap: 2rem;
+      }
+      .about-image {
+        flex: 0 0 auto; /* Remove flex basis when stacked */
+        margin-bottom: 1.5rem; /* Space below image */
+      }
+      .about-image img {
+        max-width: 300px; /* Adjust max size for stacked image */
+        max-height: 300px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .about-image img {
+        max-width: 250px; /* Further adjust max size on smaller screens */
+        max-height: 250px;
+      }
+    }
+    
+    /* Responsive adjustments for Skill items */
+    @media (max-width: 768px) {
+      .skills-track .skill-item {
+        min-width: 80px;
+        margin-right: 1.5rem;
+      }
+      .skill-logo {
+        width: 60px;
+        height: 60px;
+        padding: 0.8rem;
+      }
+      .skill-name {
+        font-size: 0.8rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .skills-track .skill-item {
+        min-width: 70px;
+        margin-right: 1rem;
+      }
+      .skill-logo {
+        width: 50px;
+        height: 50px;
+        padding: 0.6rem;
+      }
+      .skill-name {
+        font-size: 0.75rem;
+      }
+    }
+
     .experience {
       display: flex;
       flex-direction: column;
@@ -924,7 +1049,221 @@
       position: relative;
       z-index: 1;
     }
-    
+    /* ─── About Me: make image & text sit side-by-side nicely ─── */
+.about {
+  display: flex; /* Use flexbox for side-by-side layout */
+  align-items: center; /* Vertically center items */
+  gap: 4rem; /* Space between image and text */
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  flex-direction: row; /* Ensure image is on the left by default */
+}
+
+/* force illustration to hold its aspect ratio & not shrink too small */
+.about-image {
+  flex: 0 0 400px; /* Give the image container a base width, allow shrinking */
+  max-width: 100%; /* Ensure it doesn't exceed container width */
+  display: flex; /* Use flex to center image and credit */
+  flex-direction: column;
+  align-items: center;
+}
+
+/* keep the unDraw image centered & at a sane max size */
+.about-image img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  max-width: 350px; /* Max size for the image */
+  max-height: 350px; /* Max height to prevent excessive vertical space */
+  object-fit: contain; /* Ensure the whole image is visible */
+  border-radius: 12px; /* Match other rounded elements */
+  filter: drop-shadow(0 5px 15px rgba(81, 45, 56, 0.2));
+  transition: all 0.5s ease;
+  display: block;
+}
+
+/* credit sits just below it in a tighter style */
+.image-credit {
+  margin-top: 1rem; /* Space above credit */
+  font-size: 0.8rem; /* Slightly larger font size */
+  text-align: center;
+  color: var(--dark-purple); /* Default light mode color */
+}
+
+[data-theme="dark"] .image-credit {
+  color: var(--text-secondary); /* Dark mode color for credit */
+}
+
+/* content paragraph sizing & color */
+.about-content {
+  flex: 1; /* Allow text content to take up remaining space */
+  min-width: 300px; /* Ensure text doesn't get too narrow */
+}
+.about-content p {
+  color: var(--dark-purple); /* Default light mode color */
+  font-size: 1rem;
+  line-height: 1.7; /* Improved readability */
+  margin-bottom: 1.5rem; /* Space between paragraphs */
+}
+
+[data-theme="dark"] .about-content p {
+  color: var(--text); /* Dark mode color for paragraphs */
+}
+
+/* ─── Skill carousel tweaks ─── */
+.skills-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 3rem;
+  padding: 1rem 0; /* Add vertical padding */
+  /* Height will be determined by content */
+}
+
+.skills-track {
+  display: flex; /* Use flex for horizontal layout */
+  white-space: nowrap; /* Keep items on a single line for animation */
+  animation: scroll-left 40s linear infinite; /* Adjusted duration */
+  width: fit-content; /* Ensure track is wide enough */
+}
+
+.skills-track:hover {
+  animation-play-state: paused;
+}
+
+.skills-track .skill-item {
+  flex: 0 0 auto;
+  margin-right: 2rem; /* Space between items */
+  display: flex; /* Use flex for vertical layout within item */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to top */
+  min-width: 100px; /* Ensure minimum width for item */
+}
+
+/* shift exactly half the total width (because content is duplicated) */
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.skill-logo {
+  width: 80px; /* Consistent logo size */
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(244, 191, 219, 0.1); /* Light mode background */
+  border-radius: 16px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(81, 45, 56, 0.1); /* Light mode border */
+  box-shadow: 0 4px 6px rgba(81, 45, 56, 0.1); /* Light mode shadow */
+}
+
+[data-theme="dark"] .skill-logo {
+  background: rgba(244, 191, 219, 0.05); /* Dark mode background */
+  border-color: rgba(244, 191, 219, 0.2); /* Dark mode border */
+  box-shadow: 0 4px 6px rgba(18, 3, 10, 0.2); /* Dark mode shadow */
+}
+
+.skill-item:hover .skill-logo {
+  background: rgba(244, 191, 219, 0.2); /* Hover light mode background */
+  box-shadow: 0 8px 15px rgba(81, 45, 56, 0.15); /* Hover light mode shadow */
+  border-color: var(--medium-pink); /* Hover light mode border */
+}
+
+[data-theme="dark"] .skill-item:hover .skill-logo {
+  background: rgba(244, 191, 219, 0.1); /* Hover dark mode background */
+  box-shadow: 0 8px 15px rgba(18, 3, 10, 0.3); /* Hover dark mode shadow */
+}
+
+.skill-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%); /* Default grayscale */
+  transition: all 0.3s ease;
+}
+
+.skill-item:hover .skill-logo img {
+  filter: grayscale(0%); /* Color on hover */
+  transform: scale(1.1);
+}
+
+.skill-name {
+  font-size: 0.9rem; /* Readable font size */
+  font-weight: 500;
+  color: var(--dark-purple); /* Default light mode color for text */
+  text-align: center;
+  transition: color 0.3s ease;
+  margin-top: 0.5rem; /* Space above text */
+}
+
+[data-theme="dark"] .skill-name {
+  color: var(--text); /* Dark mode color - should be light */
+}
+
+.skill-item:hover .skill-name {
+  color: var(--medium-pink); /* Hover light mode color */
+}
+
+[data-theme="dark"] .skill-item:hover .skill-name {
+  color: var(--light-blue); /* Hover dark mode color */
+}
+
+/* Responsive adjustments for About section */
+@media (max-width: 992px) {
+  .about {
+    flex-direction: column; /* Stack image and text */
+    gap: 2rem;
+  }
+  .about-image {
+    flex: 0 0 auto; /* Remove flex basis when stacked */
+    margin-bottom: 1.5rem; /* Space below image */
+  }
+  .about-image img {
+    max-width: 300px; /* Adjust max size for stacked image */
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-image img {
+    max-width: 250px; /* Further adjust max size on smaller screens */
+    max-height: 250px;
+  }
+}
+
+/* Responsive adjustments for Skill items */
+@media (max-width: 768px) {
+  .skills-track .skill-item {
+    min-width: 80px;
+    margin-right: 1.5rem;
+  }
+  .skill-logo {
+    width: 60px;
+    height: 60px;
+    padding: 0.8rem;
+  }
+  .skill-name {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-track .skill-item {
+    min-width: 70px;
+    margin-right: 1rem;
+  }
+  .skill-logo {
+    width: 50px;
+    height: 50px;
+    padding: 0.6rem;
+  }
+  .skill-name {
+    font-size: 0.75rem;
+  }
+}
+
     /* Animations */
     @keyframes fadeUp {
       from {
@@ -1698,9 +2037,10 @@
         
         <div class="about">
           <div class="about-image">
-            <img src="images/undraw_creative-flow_t3kz.svg" alt="Creative Flow illustration by unDraw">
+            <img src="images/ashlyn-benoy.png" alt="Ashlyn Benoy portrait">
             <small class="image-credit">
-              A cute illustration by <a href="https://undraw.co/" target="_blank" rel="noopener">unDraw</a>
+              Character sprite made with DALL·E via ChatGPT by OpenAI<br>
+              Prompt customized by me!
             </small>
           </div>
           
@@ -1709,27 +2049,252 @@
             
             <p>I'm passionate about generative AI, full-stack development, and using code to make a real-world impact. When I'm not coding, you'll find me exploring new tech, reading sci-fi, or hiking a new trail. Let's connect and create something amazing!</p>
             
-            <div class="skills">
-              <span class="skill">Python</span>
-              <span class="skill">JavaScript</span>
-              <span class="skill">Java</span>
-              <span class="skill">C/C++</span>
-              <span class="skill">SQL</span>
-              <span class="skill">MATLAB</span>
-              <span class="skill">TypeScript</span>
-              <span class="skill">React</span>
-              <span class="skill">Django</span>
-              <span class="skill">PyTorch</span>
-              <span class="skill">TensorFlow</span>
-              <span class="skill">PySpark</span>
-              <span class="skill">Firebase</span>
-              <span class="skill">Docker</span>
-              <span class="skill">Git</span>
-              <span class="skill">Linux/Unix</span>
-              <span class="skill">Machine Learning</span>
-              <span class="skill">REST APIs</span>
-              <span class="skill">CI/CD</span>
-              <span class="skill">Agile</span>
+            <div class="skills-slider">
+              <div class="skills-track">
+                <!-- First set of skills -->
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/python.svg" alt="Python" title="Python">
+                  </div>
+                  <span class="skill-name">Python</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/javascript.svg" alt="JavaScript" title="JavaScript">
+                  </div>
+                  <span class="skill-name">JavaScript</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/java.svg" alt="Java" title="Java">
+                  </div>
+                  <span class="skill-name">Java</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/cpp.svg" alt="C++" title="C++">
+                  </div>
+                  <span class="skill-name">C/C++</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/sql.svg" alt="SQL" title="SQL">
+                  </div>
+                  <span class="skill-name">SQL</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/matlab.svg" alt="MATLAB" title="MATLAB">
+                  </div>
+                  <span class="skill-name">MATLAB</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/typescript.svg" alt="TypeScript" title="TypeScript">
+                  </div>
+                  <span class="skill-name">TypeScript</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/react.svg" alt="React" title="React">
+                  </div>
+                  <span class="skill-name">React</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/django.svg" alt="Django" title="Django">
+                  </div>
+                  <span class="skill-name">Django</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/pytorch.svg" alt="PyTorch" title="PyTorch">
+                  </div>
+                  <span class="skill-name">PyTorch</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/tensorflow.svg" alt="TensorFlow" title="TensorFlow">
+                  </div>
+                  <span class="skill-name">TensorFlow</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/pyspark.svg" alt="PySpark" title="PySpark">
+                  </div>
+                  <span class="skill-name">PySpark</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/firebase.svg" alt="Firebase" title="Firebase">
+                  </div>
+                  <span class="skill-name">Firebase</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/docker.svg" alt="Docker" title="Docker">
+                  </div>
+                  <span class="skill-name">Docker</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/git.svg" alt="Git" title="Git">
+                  </div>
+                  <span class="skill-name">Git</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/linux.svg" alt="Linux" title="Linux">
+                  </div>
+                  <span class="skill-name">Linux/Unix</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/ml.svg" alt="Machine Learning" title="Machine Learning">
+                  </div>
+                  <span class="skill-name">Machine Learning</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/api.svg" alt="REST APIs" title="REST APIs">
+                  </div>
+                  <span class="skill-name">REST APIs</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/cicd.svg" alt="CI/CD" title="CI/CD">
+                  </div>
+                  <span class="skill-name">CI/CD</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/agile.svg" alt="Agile" title="Agile">
+                  </div>
+                  <span class="skill-name">Agile</span>
+                </div>
+
+                <!-- Duplicate set for seamless looping -->
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/python.svg" alt="Python" title="Python">
+                  </div>
+                  <span class="skill-name">Python</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/javascript.svg" alt="JavaScript" title="JavaScript">
+                  </div>
+                  <span class="skill-name">JavaScript</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/java.svg" alt="Java" title="Java">
+                  </div>
+                  <span class="skill-name">Java</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/cpp.svg" alt="C++" title="C++">
+                  </div>
+                  <span class="skill-name">C/C++</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/sql.svg" alt="SQL" title="SQL">
+                  </div>
+                  <span class="skill-name">SQL</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/matlab.svg" alt="MATLAB" title="MATLAB">
+                  </div>
+                  <span class="skill-name">MATLAB</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/typescript.svg" alt="TypeScript" title="TypeScript">
+                  </div>
+                  <span class="skill-name">TypeScript</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/react.svg" alt="React" title="React">
+                  </div>
+                  <span class="skill-name">React</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/django.svg" alt="Django" title="Django">
+                  </div>
+                  <span class="skill-name">Django</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/pytorch.svg" alt="PyTorch" title="PyTorch">
+                  </div>
+                  <span class="skill-name">PyTorch</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/tensorflow.svg" alt="TensorFlow" title="TensorFlow">
+                  </div>
+                  <span class="skill-name">TensorFlow</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/pyspark.svg" alt="PySpark" title="PySpark">
+                  </div>
+                  <span class="skill-name">PySpark</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/firebase.svg" alt="Firebase" title="Firebase">
+                  </div>
+                  <span class="skill-name">Firebase</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/docker.svg" alt="Docker" title="Docker">
+                  </div>
+                  <span class="skill-name">Docker</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/git.svg" alt="Git" title="Git">
+                  </div>
+                  <span class="skill-name">Git</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/linux.svg" alt="Linux" title="Linux">
+                  </div>
+                  <span class="skill-name">Linux/Unix</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/ml.svg" alt="Machine Learning" title="Machine Learning">
+                  </div>
+                  <span class="skill-name">Machine Learning</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/api.svg" alt="REST APIs" title="REST APIs">
+                  </div>
+                  <span class="skill-name">REST APIs</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/cicd.svg" alt="CI/CD" title="CI/CD">
+                  </div>
+                  <span class="skill-name">CI/CD</span>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-logo">
+                    <img src="assets/skills/agile.svg" alt="Agile" title="Agile">
+                  </div>
+                  <span class="skill-name">Agile</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
