@@ -642,52 +642,60 @@
     }
     
     .about {
-      display: flex; /* Use flexbox for side-by-side layout */
-      align-items: center; /* Vertically center items */
-      gap: 4rem; /* Space between image and text */
-      flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-      flex-direction: row; /* Ensure image is on the left by default */
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-gap: 2rem;
+      align-items: center;
     }
     
     /* force illustration to hold its aspect ratio & not shrink too small */
     .about-image {
-      flex: 0 0 400px; /* Give the image container a base width, allow shrinking */
-      max-width: 100%; /* Ensure it doesn't exceed container width */
-      display: flex; /* Use flex to center image and credit */
+      width: 100%;
+      display: flex;
       flex-direction: column;
       align-items: center;
     }
-    
     /* keep the unDraw image centered & at a sane max size */
     .about-image img {
-      width: 100%;
-      height: auto; /* Maintain aspect ratio */
-      max-width: 350px; /* Max size for the image */
-      max-height: 350px; /* Max height to prevent excessive vertical space */
-      object-fit: contain; /* Ensure the whole image is visible */
-      border-radius: 12px; /* Match other rounded elements */
-      filter: drop-shadow(0 5px 15px rgba(81, 45, 56, 0.2));
-      transition: all 0.5s ease;
-      display: block;
-    }
+  width: 100%;
+  height: auto;
+  max-width: 350px;
+  border-radius: 12px;
+}
     
     /* credit sits just below it in a tighter style */
     .image-credit {
-      margin-top: 1rem; /* Space above credit */
-      font-size: 0.8rem; /* Slightly larger font size */
-      text-align: center;
-      color: var(--dark-purple); /* Default light mode color */
-    }
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--dark-purple);
+}
+
+/* Text box fills its column */
+.about-content {
+  width: 100%;
+  min-width: 0; /* prevents overflow in grid */
+}
     
     [data-theme="dark"] .image-credit {
       color: var(--text-secondary); /* Dark mode color for credit */
     }
     
     /* content paragraph sizing & color */
-    .about-content {
-      flex: 1; /* Allow text content to take up remaining space */
-      min-width: 300px; /* Ensure text doesn't get too narrow */
-    }
+    @media (max-width: 768px) {
+  /* Stack image above text */
+  .about {
+    grid-template-columns: 1fr;
+    grid-gap: 1.5rem;
+  }
+
+  .about-image img {
+    max-width: 100%;
+    /* if you want a tighter portrait on phones, uncomment: */
+    /* max-width: 250px; */
+  }
+}
+
     .about-content p {
       color: var(--dark-purple); /* Default light mode color */
       font-size: 1rem;
@@ -1707,8 +1715,9 @@
     }
     html[data-theme="light"] #theme-toggle .moon-icon {
       display: block;
-      color: var(--rich-purple); /* Moon icon color in light mode */
+      color: var(--light-pink); /* Moon icon color in light mode */
     }
+
 
     /* Hide moon icon in dark mode, show sun */
     html[data-theme="dark"] #theme-toggle {
