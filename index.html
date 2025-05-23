@@ -882,12 +882,66 @@
       border: 1px solid rgba(81, 45, 56, 0.1);
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(18, 3, 10, 0.1);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: center;
     }
     
-    .exp-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 30px rgba(18, 3, 10, 0.15);
-      border-color: var(--medium-pink);
+    .exp-logo {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(81, 45, 56, 0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    /* Style for SVG images */
+    .exp-logo img[src$=".svg"] {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+      padding: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    /* Style for JPG/PNG images */
+    .exp-logo img[src$=".jpg"],
+    .exp-logo img[src$=".png"] {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+    
+    .exp-item:hover .exp-logo {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(81, 45, 56, 0.15);
+    }
+    
+    .exp-item:hover .exp-logo img {
+      transform: scale(1.1);
+    }
+    
+    .exp-content {
+      flex: 1;
+    }
+    
+    @media (max-width: 768px) {
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .exp-logo {
+        margin: 0 auto;
+      }
     }
     
     .exp-date {
@@ -2329,11 +2383,16 @@
         
         <div class="experience">
           <div class="exp-item">
-            <div class="exp-date">2022 - 2026</div>
-            <div>
-              <h3 class="exp-position">Bachelor of Science in Computing Science</h3>
-              <p class="exp-company">University of Alberta</p>
-              <p class="exp-description">Relevant coursework: Data Structures & Algorithms, Database Management, Machine Learning, Artificial Intelligence, Object-Oriented Programming, Unified Modeling Language, Software Development Life Cycle, Web Development, Software Engineering, Reinforcement Learning.</p>
+            <div class="exp-logo">
+              <img src="assets/company-logos/ualberta.svg" alt="University of Alberta Logo">
+            </div>
+            <div class="exp-content">
+              <div class="exp-date">2022 - 2026</div>
+              <div>
+                <h3 class="exp-position">Bachelor of Science in Computing Science</h3>
+                <p class="exp-company">University of Alberta</p>
+                <p class="exp-description">Relevant coursework: Data Structures & Algorithms, Database Management, Machine Learning, Artificial Intelligence, Object-Oriented Programming, Unified Modeling Language, Software Development Life Cycle, Web Development, Software Engineering, Reinforcement Learning.</p>
+              </div>
             </div>
           </div>
       </div>
@@ -2345,88 +2404,118 @@
         
         <div class="experience">
           <div class="exp-item">
-            <div class="exp-date">May 2025 - Present</div>
-            <div>
-              <h3 class="exp-position">Generative AI Extern</h3>
-              <p class="exp-company">Cognizant (Remote, Canada)</p>
-              <p class="exp-description">
-                • Built full-stack AI tools including a Python-based text completion engine, emphasizing data processing and scalable application design.<br>
-                • Fine-tuned BERT and other LLM models to improve classification accuracy by 21% and speed by 18% using optimized data pipelines and inference techniques.<br>
-                • Engineered production-like pipelines using PySpark and optimized data flows for large-scale ML experiments.<br>
-                • Built CI/CD pipelines with GitHub Actions to support continuous integration and automated testing.<br>
-                • Gained hands-on experience with generative AI model iteration and validation.
-              </p>
+            <div class="exp-logo">
+              <img src="assets/company-logos/cognizant.svg" alt="Cognizant Logo">
+            </div>
+            <div class="exp-content">
+              <div class="exp-date">May 2025 - Present</div>
+              <div>
+                <h3 class="exp-position">Generative AI Extern</h3>
+                <p class="exp-company">Cognizant (Remote, Canada)</p>
+                <p class="exp-description">
+                  • Built full-stack AI tools including a Python-based text completion engine, emphasizing data processing and scalable application design.<br>
+                  • Fine-tuned BERT and other LLM models to improve classification accuracy by 21% and speed by 18% using optimized data pipelines and inference techniques.<br>
+                  • Engineered production-like pipelines using PySpark and optimized data flows for large-scale ML experiments.<br>
+                  • Built CI/CD pipelines with GitHub Actions to support continuous integration and automated testing.<br>
+                  • Gained hands-on experience with generative AI model iteration and validation.
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="exp-item">
-            <div class="exp-date">January 2025 - April 2025</div>
-            <div>
-              <h3 class="exp-position">Teaching Assistant</h3>
-              <p class="exp-company">University of Alberta (Edmonton, AB)</p>
-              <p class="exp-description">
-                • Furthered students' understanding of set theory, logic, and induction, and their use in the practice of reasoning about algorithms and programs (CMPUT 272 – Formal Systems and Logic in Computing Science).<br>
-                • Designed and delivered seminars focused on key aspects of course content from CMPUT 272 - Formal Systems and Logic in Computing Science, tailoring sessions to address specific topics and challenges.<br>
-                • Assisted in administering and proctoring exams, maintaining academic integrity standards, while also conducting regular office hours to offer individualized assistance and mentorship.
-              </p>
+            <div class="exp-logo">
+              <img src="assets/company-logos/ualberta.svg" alt="University of Alberta Logo">
+            </div>
+            <div class="exp-content">
+              <div class="exp-date">January 2025 - April 2025</div>
+              <div>
+                <h3 class="exp-position">Teaching Assistant</h3>
+                <p class="exp-company">University of Alberta (Edmonton, AB)</p>
+                <p class="exp-description">
+                  • Furthered students' understanding of set theory, logic, and induction, and their use in the practice of reasoning about algorithms and programs (CMPUT 272 – Formal Systems and Logic in Computing Science).<br>
+                  • Designed and delivered seminars focused on key aspects of course content from CMPUT 272 - Formal Systems and Logic in Computing Science, tailoring sessions to address specific topics and challenges.<br>
+                  • Assisted in administering and proctoring exams, maintaining academic integrity standards, while also conducting regular office hours to offer individualized assistance and mentorship.
+                </p>
+              </div>
             </div>
           </div>
           
           <div class="exp-item">
-            <div class="exp-date">July 2024 - February 2025</div>
-            <div>
-              <h3 class="exp-position">Research Assistant</h3>
-              <p class="exp-company">University of Alberta (Edmonton, AB)</p>
-              <p class="exp-description">
-                • Developed and evaluated optimization algorithms (Genetic Algorithms, Simulated Annealing, MAP-Elites), applying data structures and algorithms to improve AI performance.<br>
-                • Worked with relational data design and database queries to preprocess and manage large datasets, enabling efficient data integration for NLP projects.<br>
-                • Automated data processing tasks in Python/MATLAB, boosting system efficiency by 40% and reducing manual work by 70%.<br>
-                • Utilized parallel computing techniques to optimize algorithm performance and enhance scalability.<br>
-                • Used version control (git) and modern IDEs for efficient development and collaboration in Linux environments.<br>
-                • Integrated REST APIs for enhanced system communication and utilized version control (git) for collaboration and workflow management.
-              </p>
+            <div class="exp-logo">
+              <img src="assets/company-logos/ualberta.svg" alt="University of Alberta Logo">
+            </div>
+            <div class="exp-content">
+              <div class="exp-date">July 2024 - February 2025</div>
+              <div>
+                <h3 class="exp-position">Research Assistant</h3>
+                <p class="exp-company">University of Alberta (Edmonton, AB)</p>
+                <p class="exp-description">
+                  • Developed and evaluated optimization algorithms (Genetic Algorithms, Simulated Annealing, MAP-Elites), applying data structures and algorithms to improve AI performance.<br>
+                  • Worked with relational data design and database queries to preprocess and manage large datasets, enabling efficient data integration for NLP projects.<br>
+                  • Automated data processing tasks in Python/MATLAB, boosting system efficiency by 40% and reducing manual work by 70%.<br>
+                  • Utilized parallel computing techniques to optimize algorithm performance and enhance scalability.<br>
+                  • Used version control (git) and modern IDEs for efficient development and collaboration in Linux environments.<br>
+                  • Integrated REST APIs for enhanced system communication and utilized version control (git) for collaboration and workflow management.
+                </p>
+              </div>
             </div>
           </div>
           
           <div class="exp-item">
-            <div class="exp-date">June 2024 - August 2024</div>
-            <div>
-              <h3 class="exp-position">Software Engineer Intern</h3>
-              <p class="exp-company">EduTech4Space (Dubai, UAE)</p>
-              <p class="exp-description">
-                • Built interactive learning modules using JavaScript, React, HTML, and CSS, integrating Firebase for real-time updates; increased student engagement by 40%.<br>
-                • Applied data structures & algorithms to optimize content delivery and improve load times by 28% across devices.<br>
-                • Collaborated in an Agile environment, contributing to sprint planning, code reviews, and daily stand-ups with cross-functional teams.<br>
-                • Developed Python scripts (pandas, NumPy) to analyze student interaction data and support A/B testing, increasing user retention by 25%.<br>
-                • Implemented continuous integration workflows using GitHub Actions to automate testing and streamline deployment.<br>
-                • Authored technical documentation for UI components and internal engineering workflows, facilitating onboarding and knowledge sharing.
-              </p>
+            <div class="exp-logo">
+              <img src="assets/company-logos/edutech4space.jpg" alt="EduTech4Space Logo">
+            </div>
+            <div class="exp-content">
+              <div class="exp-date">June 2024 - August 2024</div>
+              <div>
+                <h3 class="exp-position">Software Engineer Intern</h3>
+                <p class="exp-company">EduTech4Space (Dubai, UAE)</p>
+                <p class="exp-description">
+                  • Built interactive learning modules using JavaScript, React, HTML, and CSS, integrating Firebase for real-time updates; increased student engagement by 40%.<br>
+                  • Applied data structures & algorithms to optimize content delivery and improve load times by 28% across devices.<br>
+                  • Collaborated in an Agile environment, contributing to sprint planning, code reviews, and daily stand-ups with cross-functional teams.<br>
+                  • Developed Python scripts (pandas, NumPy) to analyze student interaction data and support A/B testing, increasing user retention by 25%.<br>
+                  • Implemented continuous integration workflows using GitHub Actions to automate testing and streamline deployment.<br>
+                  • Authored technical documentation for UI components and internal engineering workflows, facilitating onboarding and knowledge sharing.
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="exp-item">
-            <div class="exp-date">January 2023 - Present</div>
-            <div>
-              <h3 class="exp-position">Tutor-Mentor</h3>
-              <p class="exp-company">TutorBright (Edmonton, AB)</p>
-              <p class="exp-description">
-                • Provided academic assistance to students in grades 5-12 in Mathematics, Social Studies, Science and Computer Science.<br>
-                • Developed lesson plans and study strategies tailored to individual students' needs and learning styles.<br>
-                • Utilized effective communication and interpersonal skills to build rapport with students and foster a positive learning environment.
-              </p>
+            <div class="exp-logo">
+              <img src="assets/company-logos/tutorbright.jpg" alt="TutorBright Logo">
+            </div>
+            <div class="exp-content">
+              <div class="exp-date">January 2023 - Present</div>
+              <div>
+                <h3 class="exp-position">Tutor-Mentor</h3>
+                <p class="exp-company">TutorBright (Edmonton, AB)</p>
+                <p class="exp-description">
+                  • Provided academic assistance to students in grades 5-12 in Mathematics, Social Studies, Science and Computer Science.<br>
+                  • Developed lesson plans and study strategies tailored to individual students' needs and learning styles.<br>
+                  • Utilized effective communication and interpersonal skills to build rapport with students and foster a positive learning environment.
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="exp-item">
-            <div class="exp-date">July 2023 - October 2023</div>
-            <div>
-              <h3 class="exp-position">Promotions and Multi-Channel Marketing Intern</h3>
-              <p class="exp-company">International Research Symposium in Service Management (Dubai, UAE)</p>
-              <p class="exp-description">
-                • Developed high-quality, engaging content such as blogs, articles, and videos and optimized the content for search engine optimization (SEO).<br>
-                • Analyzed data to identify trends, measure success metrics, and make data-driven recommendations for content optimization.<br>
-                • Collaborated with the web development team on various projects involving JavaScript.
-              </p>
+            <div class="exp-logo">
+              <img src="assets/company-logos/irssm.png" alt="IRSSM Logo">
+            </div>
+            <div class="exp-content">
+              <div class="exp-date">July 2023 - October 2023</div>
+              <div>
+                <h3 class="exp-position">Promotions and Multi-Channel Marketing Intern</h3>
+                <p class="exp-company">International Research Symposium in Service Management (Dubai, UAE)</p>
+                <p class="exp-description">
+                  • Developed high-quality, engaging content such as blogs, articles, and videos and optimized the content for search engine optimization (SEO).<br>
+                  • Analyzed data to identify trends, measure success metrics, and make data-driven recommendations for content optimization.<br>
+                  • Collaborated with the web development team on various projects involving JavaScript.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -2642,6 +2731,7 @@
           
       </div>
     </section>
+    
     
   </main>
   <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
